@@ -1,0 +1,15 @@
+book_filename: "r4ds:ggplot2"
+output_dir: "_build"
+new_session: yes
+
+rmd_files:
+  - "index.qmd"
+
+  - "data-visualize.qmd"
+
+  - "layers.qmd"
+  - "dummy-script.qmd"
+
+delete_merged_file: true
+edit: "https://github.com/gurinina/r4ds:ggplot2/edit/master/%s"
+history: "https://github.com/gurinina/r4ds:ggplot2/commits/master/%s"
