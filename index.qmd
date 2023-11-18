@@ -1,6 +1,4 @@
 ---
-title: "r4ds-ggplot2 " 
-knit: "bookdown::render_book"
 output: html
 title: "Welcome"
 link-citations: true
