@@ -1,8 +1,13 @@
 # Data visualization {#sec-data-visualization}
 
 ```{r}
-#| echo: false
+knitr::opts_chunk$set(warning = FALSE, message = FALSE)
+```
 
+```{r, echo = FALSE}
+library(tidyverse)
+library(ggplot2)
+library(palmerpenguins)
 source("_common.R")
 ```
 
@@ -121,7 +126,7 @@ Among the variables in `penguins` are:
 
 To learn more about `penguins`, open its help page by running `?penguins`.
 
-### Ultimate goal {#sec-ultimate-goal}
+### Ultimate goal {#data-visualize-data-visualize-data-visualize-sec-ultimate-goal}
 
 Our ultimate goal in this chapter is to recreate the following visualization displaying the relationship between flipper lengths and body masses of these penguins, taking into consideration the species of the penguin.
 
@@ -226,7 +231,7 @@ Like R, ggplot2 subscribes to the philosophy that missing values should never si
 This type of warning is probably one of the most common types of warnings you will see when working with real data -- missing values are a very common issue and you'll learn more about them throughout the book, particularly in @sec-missing-values.
 For the remaining plots in this chapter we will suppress this warning so it's not printed alongside every single plot we make.
 
-### Adding aesthetics and layers {#sec-adding-aesthetics-layers}
+### Adding aesthetics and layers {#data-visualize-data-visualize-data-visualize-sec-adding-aesthetics-layers}
 
 Scatterplots are useful for displaying the relationship between two numerical variables, but it's always a good idea to be skeptical of any apparent relationship between two variables and ask if there may be other variables that explain or change the nature of this apparent relationship.
 For example, does the relationship between flipper length and body mass differ by species?
@@ -451,7 +456,7 @@ We finally have a plot that perfectly matches our "ultimate goal"!
       )
     ```
 
-## ggplot2 calls {#sec-ggplot2-calls}
+## ggplot2 calls {#data-visualize-data-visualize-data-visualize-sec-ggplot2-calls}
 
 As we move on from these introductory sections, we'll transition to a more concise expression of ggplot2 code.
 So far we've been very explicit, which is helpful when you are learning:
@@ -837,7 +842,7 @@ You will learn about many other geoms for visualizing distributions of variables
       geom_bar(position = "fill")
     ```
 
-## Saving your plots {#sec-ggsave}
+## Saving your plots {#data-visualize-data-visualize-data-visualize-sec-ggsave}
 
 Once you've made a plot, you might want to get it out of R by saving it as an image that you can use elsewhere.
 That's the job of `ggsave()`, which will save the plot most recently created to disk:

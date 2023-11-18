@@ -1,32 +1,52 @@
+project:
+  type: book
+  output-dir: _book
+
 book:
-  title: "R for Data Science: Visualizations"
+  title: "r4ds-ggplot2"
   reader-mode: true
   author: "Hadley Wickham"
-  date: "5/9/2021"
+  downloads: [pdf, epub]
+  date: "2023-11-13"
+  sidebar:
+    title: false
+    style: docked
+    background: primary
+    foreground: light
+    search: false
+  navbar:
+    background: primary
+    foreground: light
+    search: true
   chapters:
     - index.qmd
     - data-visualize.qmd
     - layers.qmd
   page-footer:
     left: |
-      The Solutions to Exercises for R for Data Science (2e) was written by
-      Jabir Ghaffar, Davon Person, and Mine Çetinkaya-Rundel.
+      R for Data Science was written by Hadley Wickham
     right: |
       This book was built with <a href="https://quarto.org/">Quarto</a>.
   site-url: https://r4ds.hadley.nz/
-  repo-url: https://github.com/mine-cetinkaya-rundel/r4ds-solutions/
+  repo-url: https://github.com/gurinina/r4ds-ggplot2/
   repo-branch: main
-  repo-actions: [edit, issue]
+
+
+
 format:
   html:
+    toc: true
+    toc-location: left
+    toc-depth: 2
     theme:
-      - cosmo
-      - r4ds.scss
-    code-link: true
-    author-meta: "Jabir Ghaffar, Davon Person, and Mine Çetinkaya-Rundel"
-    callout-appearance: simple
-ditor: visual
-execute:
-  freeze: auto
-  
-  
+      cosmo
+      r4ds.scss
+  pdf:
+    documentclass: report
+    margin-left: 30mm
+    margin-right: 30mm
+    cover-image: images/koos10.png
+  epub:
+    cover-image: images/koos10.png
+
+highlight-style: pygments

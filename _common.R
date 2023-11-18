@@ -10,20 +10,20 @@ knitr::opts_chunk$set(
   fig.show = "hold"
 )
 
-# options(
-#   dplyr.print_min = 6,
-#   dplyr.print_max = 6,
-#   pillar.max_footer_lines = 2,
-#   pillar.min_chars = 15,
-#   stringr.view_n = 6,
-#   # Temporarily deactivate cli output for quarto
-#   cli.num_colors = 0,
-#   cli.hyperlink = FALSE,
-#   pillar.bold = TRUE,
-#   width = 77 # 80 - 3 for #> comment
-# )
-# 
-ggplot2::theme_set(ggplot2::theme_bw())
+options(
+  dplyr.print_min = 6,
+  dplyr.print_max = 6,
+  pillar.max_footer_lines = 2,
+  pillar.min_chars = 15,
+  stringr.view_n = 6,
+  # Temporarily deactivate cli output for quarto
+  cli.num_colors = 0,
+  cli.hyperlink = FALSE,
+  pillar.bold = TRUE,
+  width = 77 # 80 - 3 for #> comment
+)
+
+# ggplot2::theme_set(ggplot2::theme_bw)
 # 
 # # use results: "asis" when setting a status for a chapter
 # status <- function(type) {
