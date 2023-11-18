@@ -3,7 +3,7 @@
 /*-- scss:defaults --*/
 
 // Colors
-$navt: #000080;
+$navy: #000080;
 $light-pink: #f4cfdfE;
 $white: #FFFFFF;
 $lavender: #dcd0ff;
@@ -11,10 +11,10 @@ $purple: #4B006E;
 $black: #000D0D;
 $red: #FF0000;
 $cornflower: #AFD5F6 !default;
-$toc-font-size:	12px;
+$toc-font-size:	10px;
 $toc-font-color: $white;
 $h1-font-size: 10px;
-$h2-font-size: 12px;
+$h2-font-size: 10px;
 
 /*-- scss:rules --*/
 
@@ -26,6 +26,9 @@ $body-bg: $white; // page background
 $body-color: $navy; // page text
 $footer-bg: $white // footer
 $link-color: $purple; // hyperlinks
+
+$sidebar-bg: $navy; // navbar
+$sidebar-fg: $white; // navbar foreground elements
 
 // Inline code
 $code-bg: $red; // inline code background color

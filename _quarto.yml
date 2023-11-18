@@ -5,18 +5,12 @@ project:
 book:
   title: "r4ds-ggplot2"
   reader-mode: true
-  author: "Hadley Wickham"
   downloads: [pdf, epub]
-  date: "2023-11-13"
   sidebar:
     title: false
     style: docked
-    background: primary
-    foreground: light
     search: false
   navbar:
-    background: primary
-    foreground: light
     search: true
   chapters:
     - index.qmd
@@ -24,7 +18,7 @@ book:
     - layers.qmd
   page-footer:
     left: |
-      R for Data Science was written by Hadley Wickham
+      R for Data Science by Hadley Wickham
     right: |
       This book was built with <a href="https://quarto.org/">Quarto</a>.
   site-url: https://r4ds.hadley.nz/
