@@ -1,13 +1,7 @@
 # Data visualization {#sec-data-visualization}
 
-```{r}
-knitr::opts_chunk$set(warning = FALSE, message = FALSE)
-```
-
-```{r, echo = FALSE}
-library(tidyverse)
-library(ggplot2)
-library(palmerpenguins)
+```{r, eval = FALSE}
+BiocManager::install(c("palmerpenguins","patchwork","ggthemes"))
 ```
 
 ## Introduction
@@ -26,32 +20,13 @@ We'll finish off with saving your plots and troubleshooting tips.
 ### Prerequisites
 
 This chapter focuses on ggplot2, one of the core packages in the tidyverse.
-To access the datasets, help pages, and functions used in this chapter, load the tidyverse by running:
 
 ```{r}
-#| label: setup
 
 library(tidyverse)
 ```
 
-That one line of code loads the core tidyverse; the packages that you will use in almost every data analysis.
-It also tells you which functions from the tidyverse conflict with functions in base R (or from other packages you might have loaded)[^data-visualize-1].
-
-[^data-visualize-1]: You can eliminate that message and force conflict resolution to happen on demand by using the conflicted package, which becomes more important as you load more packages.
-    You can learn more about conflicted at <https://conflicted.r-lib.org>.
-
-If you run this code and get the error message `there is no package called 'tidyverse'`, you'll need to first install it, then run `library()` once again.
-
-```{r}
-#| eval: false
-
-install.packages("tidyverse")
-library(tidyverse)
-```
-
-You only need to install a package once, but you need to load it every time you start a new session.
-
-In addition to tidyverse, we will also use the **palmerpenguins** package, which includes the `penguins` dataset containing body measurements for penguins on three islands in the Palmer Archipelago, and the ggthemes package, which offers a colorblind safe color palette.
+We will also use the **palmerpenguins** package, which includes the `penguins` dataset containing body measurements for penguins on three islands in the Palmer Archipelago, and the ggthemes package, which offers a colorblind safe color palette.
 
 ```{r}
 library(palmerpenguins)
@@ -75,9 +50,9 @@ Let's create visualizations that we can use to answer these questions.
 
 You can test your answers to those questions with the `penguins` **data frame** found in palmerpenguins (a.k.a. `palmerpenguins::penguins`).
 A data frame is a rectangular collection of variables (in the columns) and observations (in the rows).
-`penguins` contains `r nrow(penguins)` observations collected and made available by Dr. Kristen Gorman and the Palmer Station, Antarctica LTER[^data-visualize-2].
+`penguins` contains `r nrow(penguins)` observations collected and made available by Dr. Kristen Gorman and the Palmer Station, Antarctica LTER[^01-visualize-1].
 
-[^data-visualize-2]: Horst AM, Hill AP, Gorman KB (2020).
+[^01-visualize-1]: Horst AM, Hill AP, Gorman KB (2020).
     palmerpenguins: Palmer Archipelago (Antarctica) penguin data.
     R package version 0.1.0.
     <https://allisonhorst.github.io/palmerpenguins/>.
@@ -769,10 +744,10 @@ However adding too many aesthetic mappings to a plot makes it cluttered and diff
 Another way, which is particularly useful for categorical variables, is to split your plot into **facets**, subplots that each display one subset of the data.
 
 To facet your plot by a single variable, use `facet_wrap()`.
-The first argument of `facet_wrap()` is a formula[^data-visualize-3], which you create with `~` followed by a variable name.
+The first argument of `facet_wrap()` is a formula[^01-visualize-2], which you create with `~` followed by a variable name.
 The variable that you pass to `facet_wrap()` should be categorical.
 
-[^data-visualize-3]: Here "formula" is the name of the thing created by `~`, not a synonym for "equation".
+[^01-visualize-2]: Here "formula" is the name of the thing created by `~`, not a synonym for "equation".
 
 ```{r}
 #| warning: false
@@ -927,8 +902,3 @@ In this chapter, you've learned the basics of data visualization with ggplot2.
 We started with the basic idea that underpins ggplot2: a visualization is a mapping from variables in your data to aesthetic properties like position, color, size and shape.
 You then learned about increasing the complexity and improving the presentation of your plots layer-by-layer.
 You also learned about commonly used plots for visualizing the distribution of a single variable as well as for visualizing relationships between two or more variables, by leveraging additional aesthetic mappings and/or splitting your plot into small multiples using faceting.
-
-We'll use visualizations again and again throughout this book, introducing new techniques as we need them as well as do a deeper dive into creating visualizations with ggplot2 in @sec-layers through @sec-communication.
-
-With the basics of visualization under your belt, in the next chapter we're going to switch gears a little and give you some practical workflow advice.
-We intersperse workflow advice with data science tools throughout this part of the book because it'll help you stay organized as you write increasing amounts of R code.

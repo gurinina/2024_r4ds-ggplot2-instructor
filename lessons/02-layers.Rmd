@@ -1,5 +1,7 @@
 ---
-output: html_document
+output: 
+html_document:
+  code_folding: hide        
 editor_options: 
   chunk_output_type: console
 ---
@@ -18,7 +20,7 @@ library(palmerpenguins)
 
 ## Introduction
 
-In @sec-data-visualization, you learned much more than just how to make scatterplots, bar charts, and boxplots.
+In [the last chapter][sec-data-visualization], you learned much more than just how to make scatterplots, bar charts, and boxplots.
 You learned a foundation that you can use to make *any* type of plot with ggplot2.
 
 In this chapter, you'll expand on that foundation as you learn about the layered grammar of graphics.
@@ -26,7 +28,6 @@ We'll start with a deeper dive into aesthetic mappings, geometric objects, and f
 Then, you will learn about statistical transformations ggplot2 makes under the hood when creating a plot.
 These transformations are used to calculate new values to plot, such as the heights of bars in a bar plot or medians in a box plot.
 You will also learn about position adjustments, which modify how geoms are displayed in your plots.
-Finally, we'll briefly introduce coordinate systems.
 
 We will not cover every single function and option for each of these layers, but we will walk you through the most important and commonly used functionality provided by ggplot2 as well as introduce you to packages that extend ggplot2.
 
@@ -40,16 +41,22 @@ To access the datasets, help pages, and functions used in this chapter, load the
 #| message: false
 
 library(tidyverse)
+library(patchwork)
 ```
 
 ## Aesthetic mappings
 
 > "The greatest value of a picture is when it forces us to notice what we never expected to see." --- John Tukey
 
-Remember that the `mpg` data frame bundled with the ggplot2 package contains `r nrow(mpg)` observations on `r mpg %>% distinct(model) %>% nrow()` car models.
+The `r mpg` data frame is bundled with the ggplot2 package and contains `r nrow(mpg)` observations on `r mpg %>% distinct(model) %>% nrow()` car models.
 
 ```{r}
-mpg
+?mpg
+
+nrow(mpg)
+
+sapply(mpg,class)
+
 ```
 
 Among the variables in `mpg` are:
@@ -71,8 +78,7 @@ We can do this with a scatterplot where the numerical variables are mapped to th
 #| layout-ncol: 2
 #| fig-width: 4
 #| fig-alt: |
-#|   Two scatterplots next to each other, both visualizing highway fuel 
-#|   efficiency versus engine size of cars and showing a negative 
+#|   Two scatterplots next to each other, both visualizing highway fuel #|   efficiency versus engine size of cars and showing a negative 
 #|   association. In the plot on the left class is mapped to the color 
 #|   aesthetic, resulting in different colors for each class. 
 #|   In the plot on the right class is mapped the shape aesthetic, 
@@ -224,7 +230,7 @@ In the next section we dive deeper into geoms.
 4.  What happens if you map an aesthetic to something other than a variable name, like `aes(color = displ < 5)`?
     Note, you'll also need to specify x and y.
 
-## Geometric objects {#sec-geometric-objects}
+## Geometric objects
 
 How are these two plots similar?
 
@@ -944,14 +950,16 @@ To learn more about a position adjustment, look up the help page associated with
 
 We can expand on the graphing template you learned in @sec-ggplot2-calls by adding position adjustments, stats, coordinate systems, and faceting:
 
-    ggplot(data = <DATA>) + 
-      <GEOM_FUNCTION>(
-         mapping = aes(<MAPPINGS>),
-         stat = <STAT>, 
-         position = <POSITION>
-      ) +
-      <COORDINATE_FUNCTION> +
-      <FACET_FUNCTION>
+```         
+ggplot(data = <DATA>) + 
+  <GEOM_FUNCTION>(
+     mapping = aes(<MAPPINGS>),
+     stat = <STAT>, 
+     position = <POSITION>
+  ) +
+  <COORDINATE_FUNCTION> +
+  <FACET_FUNCTION>
+```
 
 Our new template takes seven parameters, the bracketed words that appear in the template.
 In practice, you rarely need to supply all seven parameters to make a graph because ggplot2 will provide useful defaults for everything except the data, the mappings, and the geom function.
