@@ -2,19 +2,18 @@
 title: "r4ds-ggplot2 " 
 knit: "bookdown::render_book"
 output:
-  bookdown::gitbook: 
-      number_sections: true
+  bookdown::gitbook:
+    number_sections: false
 date: "2023-11-13" 
 link-citations: true
-github-repo: gurinina/genomics/r4ds-ggplot2  
-url: https\://bookdown.org/ggiaever/r4ds-ggplot2  
+github-repo: gurinina/genomics/r4-datascience-ggplot 
+url: https\://bookdown.org/ggiaever/r4-datascience-ggplot 
 site: bookdown::bookdown_site 
 documentclass: book
-favicon: "img/icons8-biotech-64.png"
-cover-image: "img/koos10.png"
+cover-image: "images/koos10.png"
 ---
 
-## Welcome {.unnumbered}
+# Welcome {-}
 
 This website us the ggplot visulization sections of Hadley Wickham's book [2nd edition of "R for Data Science"](https://r4ds.hadley.nz/).
 
