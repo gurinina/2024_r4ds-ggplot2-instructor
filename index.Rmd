@@ -1,13 +1,13 @@
 ---
-title: "r4ds-ggplot2 " 
+title: "r4ds-ggplot2" 
 knit: "bookdown::render_book"
 output:
   bookdown::gitbook:
     number_sections: false
 date: "2023-11-13" 
 link-citations: true
-github-repo: gurinina/genomics/r4-datascience-ggplot 
-url: https\://bookdown.org/ggiaever/r4-datascience-ggplot 
+github-repo: gurinina/genomics/r4ds-ggplot2 
+url: https\://bookdown.org/ggiaever/r4ds-ggplot2 
 site: bookdown::bookdown_site 
 documentclass: book
 cover-image: "images/koos10.png"
