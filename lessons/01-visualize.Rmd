@@ -1,4 +1,4 @@
-# Data visualization {#sec-data-visualization}
+# Data visualization {#sec-visualize}
 
 ```{r, eval = FALSE}
 BiocManager::install(c("palmerpenguins","patchwork","ggthemes"))

@@ -1,10 +1,6 @@
-set.seed(1014)
+
 
 knitr::opts_chunk$set(
-  comment = "#",
-  collapse = TRUE,
-  # cache = TRUE,
-  fig.retina = 2,
   fig.width = 6,
   fig.asp = 2/3,
   message = FALSE,
@@ -24,5 +20,49 @@ knitr::opts_chunk$set(
 #   pillar.bold = TRUE,
 #   # width = 77 # 80 - 3 for #> comment
 # )
-
+# local({
+#   hook_source <- knitr::knit_hooks$get('chunk')
+#   knitr::knit_hooks$set(source = function(x, options) {
+#     
+#     hook_source(x, options)
+#   })
+# })
 ggplot2::theme_set(ggplot2::theme_bw())
+
+  knitr::knit_hooks$set(chunk = function(x, options) {
+    if (!is.null(options$button)) {
+      rnd_id <- substr(tempfile("b", "", ""), 2, 9)
+      paste0(
+        '<button class="btn btn-primary" data-toggle="collapse" data-target="#',
+        rnd_id, '">',
+        options$button, '</button> <div id="',
+        rnd_id, '" class="collapse">',
+        x, '</div>')
+    } else {
+      x
+    }
+  })
+
+knitr::knit_hooks$set(answer = function(before, options, envir) {
+  if (before) {
+    paste(
+      "<div class=\"accordion\">",
+      "<h3 class=\"toc-ignore\">Answer</h3>",
+      "<div style=\"background: #fff;\">",  sep = "\n")
+  } else {
+    paste("</div>", "</div>", sep = "\n")
+  }
+})
+
+eng_text_answer <- knitr:::eng_html_asset(
+                               paste(
+                                   "<div class=\"accordion\">",
+                                   "<h3 class=\"toc-ignore\">Answer</h3>",
+                                   "<div style=\"background: #fff;\">",
+                                   "<p>",  sep = "\n"),
+                               paste(
+                                   "</div>", "</div>", "</p>", sep = "\n"
+                               )
+                           )
+
+knitr::knit_engines$set(text_answer = eng_text_answer)

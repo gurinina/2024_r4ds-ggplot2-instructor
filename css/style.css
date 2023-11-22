@@ -1,3 +1,85 @@
+/* details end */
+.collapsible {
+  background-color: #000080;
+  color: white;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+}
+
+.active, .collapsible:hover {
+  background-color: #6495ED
+
+
+
+.content {
+  padding: 0 18px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+  background-color: #6495ED;
+}
+
+
+
+.showopt {
+  background-color: #004c93;
+  color: #FFFFFF; 
+  width: 100px;
+  height: 20px;
+  text-align: center;
+  vertical-align: middle !important;
+  float: right;
+  font-family: sans-serif;
+  border-radius: 8px;
+}
+
+.showopt:hover {
+    background-color: #000080;
+    color: #004c93;
+}
+
+pre.plot {
+  background-color: white !important;
+}
+
+.details {
+  border: 3px solid #aaa;
+  width: 672px;
+  border-color: black;
+  color: #FFFFFF;
+  background-color: #000080;
+  border-radius: 4px;
+  padding: 0.5em 0.5em 0;
+}
+
+summary {
+  font-weight: bold;
+  margin: -0.5em -0.5em 0;
+  padding: 0.5em;
+}
+
+.details[open] {
+  padding: 0.5em;
+  border: 3px solid black;
+  width: 672px;
+  background-color: #004c93;;
+  color: #000080;
+  border-radius: 4px;
+  border-color: black;
+  padding: 0.5em 0.5em 0;
+}
+
+
+.details[open] summary {
+  border-bottom: 1px solid black;
+  margin-bottom: 0.5em;
+}
+/* details end */
 code-bg {
   color: red;
 }
@@ -125,6 +207,22 @@ dt {
   color: #FFFFFF;
 }
 
+
+li a {
+  display: block;
+  padding: 8px;
+  color: #FFFFFF;
+  background-color: #000080;
+}
+.book .book-header.fixed {
+  position: fixed;
+  right: 0;
+  top: 0;
+  left: 0;
+  border-bottom: 1px solid;
+  background-color: #000080;
+  color: #FFFFFFF;
+}
 /* this is the sidebar hover */
 .book .book-summary ul.summary li a:hover {
   background-color: #ffffff;
@@ -178,7 +276,8 @@ book.with-summary .book-header.fixed {
   font-weight: bold;
   top:0;
   left:-250px;
-  background-color: #000080;
+  background-color: #000080!important
+  ;
   color: #FFFFFF;
 }
 
