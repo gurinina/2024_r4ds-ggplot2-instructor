@@ -1,34 +1,25 @@
----
-output: 
-  xaringan::moon_reader:
-    theme: flatly
-    highlight: tango
-    includes:
-      after_body:  "scripta/collapse-output.html"
-editor_options: 
-  chunk_output_type: console
-  
----
-
 # Layers {#sec-layers}
+```{r}
+1  # code is hidden initially
+```
 
-<button type="btn btn-primary" class="collapsible">where</button>
-<div class="content">ggplot(mpg, aes(x = hwy, y = displ)) +geom_point(color = "pink", shape = "triangle")</div>
+<div class="fold s">
 
+```{r}
+2  # code is shown initially
+```
+</div>
+
+
+<div class="fold s">
 ```{r}
 # set global options
 source("_common.R")
 ```
-
-```{r, echo = FALSE}
-library(tidyverse)
-library(ggplot2)
-library(palmerpenguins)
-```
-
+</div>
 ## Introduction
 
-In [the last chapter][sec-visualize], you learned much more than just how to make scatterplots, bar charts, and boxplots.
+In the last chapter you learned much more than just how to make scatterplots, bar charts, and boxplots.
 You learned a foundation that you can use to make *any* type of plot with ggplot2.
 
 In this chapter, you'll expand on that foundation as you learn about the layered grammar of graphics.
@@ -56,7 +47,7 @@ library(patchwork)
 
 > "The greatest value of a picture is when it forces us to notice what we never expected to see." --- John Tukey
 
-The `r mpg` data frame is bundled with the ggplot2 package and contains `r nrow(mpg)` observations on `r mpg %>% distinct(model) %>% nrow()` car models.
+The `mpg` data frame is bundled with the ggplot2 package and contains `r nrow(mpg)` observations on `r mpg %>% distinct(model) %>% nrow()` car models.
 
 ```{r}
 #?mpg
@@ -81,6 +72,7 @@ Among the variables in `mpg` are:
 Let's start by visualizing the relationship between `displ` and `hwy` for various `class`es of cars.
 We can do this with a scatterplot where the numerical variables are mapped to the `x` and `y` aesthetics and the categorical variable is mapped to an aesthetic like `color` or `shape`.
 
+.details[
 ```{r}
 #| layout-ncol: 2
 #| fig-width: 4
@@ -94,11 +86,12 @@ We can do this with a scatterplot where the numerical variables are mapped to th
 #|   mapping between color or shape and levels of the class variable.
 
 ggplot(mpg, aes(x = displ, y = hwy, color = class)) +
-  geom_point()
+  geom_point() |
 
 ggplot(mpg, aes(x = displ, y = hwy, shape = class)) +
   geom_point()
 ```
+]
 
 When `class` is mapped to `shape`, we get two warnings:
 
@@ -112,6 +105,7 @@ The second warning is related -- there are 62 SUVs in the dataset and they're no
 
 Similarly, we can map `class` to `size` or `alpha` aesthetics as well, which control the shape and the transparency of the points, respectively.
 
+.details{
 ```{r}
 #| layout-ncol: 2
 #| fig-width: 4
@@ -126,11 +120,12 @@ Similarly, we can map `class` to `size` or `alpha` aesthetics as well, which con
 #|   or alpha level and levels of the class variable.
 
 ggplot(mpg, aes(x = displ, y = hwy, size = class)) +
-  geom_point()
+  geom_point() |
 
 ggplot(mpg, aes(x = displ, y = hwy, alpha = class)) +
   geom_point()
 ```
+}
 
 Both of these produce warnings as well:
 
@@ -211,85 +206,43 @@ In the next section we dive deeper into geoms.
 
 ## 2.2.1 Exercises {.unnumbered}
 
-
-
-```{r}
-library(details)
-```
- 
- 
-
-<details><summary>Toggle</summary> This is the content inside the toggle. </details>
-
-
-
-
-
-
-
-.details{
-```{r}
-
-ggplot(mpg, aes(x = hwy, y = displ)) +
-      geom_point(color = "pink", shape = "triangle")
-```
-}
-
-
-
-.details{
-```{r, echo = FALSE, details.summary = 'Ans: 3.'}
-  
-x = 'ggplot(mpg, aes(x = hwy, y = displ)) +
-      geom_point(color = "pink", shape = "triangle")'
-
-hooks=knitr::knit_hooks$get()
-```
-}
-
-details::details(hooks$chunk(x,options))      
-
-
+1.  Create a scatterplot of `hwy` vs. `displ` where the points are pink filled in triangles.
 
 2.  Why did the following code not result in a plot with blue points?
-.details{
+
 ```{r}
-    #| fig-show: hide
-    #| fig-alt: |
-    #|   Scatterplot of highway fuel efficiency versus engine size of cars  
-    #|   that shows a negative association. All points are red and 
-    #|   the legend shows a red point that is mapped to the word blue.
+#| fig-show: hide
+#| fig-alt: |
+#|   Scatterplot of highway fuel efficiency versus engine size of cars  
+#|   that shows a negative association. All points are red and 
+#|   the legend shows a red point that is mapped to the word blue.
 
     ggplot(mpg) + 
       geom_point(aes(x = displ, y = hwy, color = "blue"))
 ```
-}
 
-.details{
-```{r}
-# Color should be set outside of the aesthetic mapping.
+3.  What does the `stroke` aesthetic do? What shapes does it work with? (Hint: use `?geom_point`)
 
-    ggplot(mpg, aes(x = displ, y = hwy)) +
-      geom_point(color = "blue")
+```{r, hint}
+shapes <- data.frame(
+  shape = c(0:19, 20, 21, 22, 23, 24),
+  x = 0:24 %/% 5,
+  y = -(0:24 %% 5)
+)
+ggplot(shapes, aes(x, y)) + 
+  geom_point(aes(shape = shape), size = 5, fill = "red") +
+  geom_text(aes(label = shape), hjust = 0, nudge_x = 0.15) +
+  scale_shape_identity() +
+  expand_limits(x = 4.1) +
+  theme_void()
 ```
-#### Ans. 2 ####
-.details{
-3.  A. What does the `stroke` aesthetic do?
-    B. What point shapes does it work with?
-    (hint: use `?geom_point`)
-    
-```{.details,  echo = FALSE, .details.summary = 'Ans: 3.'}
 
-
-```
-    
-
-4.  What happens if you map an aesthetic to something other than a variable name, like `aes(color = displ < 5)`?
-    Note, you'll also need to specify x and y.
+4.  What happens if you map an aesthetic to something other than a variable name, like `aes(color = displ < 5)`? Note, you'll also need to specify x and y.
 
 ## Geometric objects
 
 How are these two plots similar?
+
 
 ```{r}
 #| echo: false
@@ -303,11 +256,14 @@ How are these two plots similar?
 #|   between these variables. A confidence interval around the smooth 
 #|   curve is also displayed.
 
-ggplot(mpg, aes(x = displ, y = hwy)) + 
-  geom_point()
+g1 <- ggplot(mpg, aes(x = displ, y = hwy)) + 
+  geom_point() 
 
-ggplot(mpg, aes(x = displ, y = hwy)) + 
+g2 <- ggplot(mpg, aes(x = displ, y = hwy)) + 
   geom_smooth()
+
+
+g1 | g2
 ```
 
 Both plots contain the same x variable, the same y variable, and both describe the same data.
@@ -351,7 +307,7 @@ On the other hand, you *could* set the linetype of a line.
 
 # Left
 ggplot(mpg, aes(x = displ, y = hwy, shape = drv)) + 
-  geom_smooth()
+  geom_smooth() |
 
 # Right
 ggplot(mpg, aes(x = displ, y = hwy, linetype = drv)) + 
@@ -402,11 +358,11 @@ It is convenient to rely on this feature because the `group` aesthetic by itself
 
 # Left
 ggplot(mpg, aes(x = displ, y = hwy)) +
-  geom_smooth()
+  geom_smooth() |
 
 # Middle
 ggplot(mpg, aes(x = displ, y = hwy)) +
-  geom_smooth(aes(group = drv))
+  geom_smooth(aes(group = drv)) |
 
 # Right
 ggplot(mpg, aes(x = displ, y = hwy)) +
@@ -505,51 +461,57 @@ To learn more about any single geom, use the help (e.g., `?geom_smooth`).
 
 ## 2.3.1 Exercises {.unnumbered}
 
-1.  What geom would you use to draw a line chart?
-    A boxplot?
-    A histogram?
-    An area chart?
+1.  What geom would you use to draw a line chart? A boxplot? A histogram? An area chart?
+
+```{r geom-basic}
+df <- data.frame(
+  x = c(3, 1, 5), 
+  y = c(2, 4, 6), 
+  label = c("a","b","c")
+)
+p <- ggplot(df, aes(x, y, label = label))  
+  
+```
 
 2.  Earlier in this chapter we used `show.legend` without explaining it:
 
-.details{
 ```{r}
-    #| fig-show: hide
-    #| message: false
+#| fig-show: hide
+#| message: false
 
     ggplot(mpg, aes(x = displ, y = hwy)) +
       geom_smooth(aes(color = drv), show.legend = FALSE)
 ```
-}
-    What does `show.legend = FALSE` do here?
-    What happens if you remove it?
-    Why do you think we used it earlier?
+
+    
+What does `show.legend = FALSE` do here?
+What happens if you remove it?
+
 
 3.  What does the `se` argument to `geom_smooth()` do?
 
-4.  Recreate the R code necessary to generate and save the following graphs, and arrange them in a figure.
-    Note that wherever a categorical variable is used in the plot, it's `drv`.
+4.  Recreate the R code necessary to generate and save the following graphs, and arrange them in a figure. Note that wherever a categorical variable is used in the plot, it's `drv`.
 
 ```{r}
-
-    #| message: false
-    #| layout-ncol: 2
-    #| fig-width: 3
-    #| fig-alt: |
-    #|   There are six scatterplots in this figure, arranged in a 3x2 grid.
-    #|   In all plots highway fuel efficiency of cars are on the y-axis and
-    #|   engine size is on the x-axis. The first plot shows all points in black
-    #|   with a smooth curve overlaid on them. In the second plot points are
-    #|   also all black, with separate smooth curves overlaid for each level of
-    #|   drive train. On the third plot, points and the smooth curves are
-    #|   represented in different colors for each level of drive train. In the
-    #|   fourth plot the points are represented in different colors for each
-    #|   level of drive train but there is only a single smooth line fitted to
-    #|   the whole data. In the fifth plot, points are represented in different
-    #|   colors for each level of drive train, and a separate smooth curve with
-    #|   different line types are fitted to each level of drive train. And
-    #|   finally in the sixth plot points are represented in different colors
-    #|   for each level of drive train and they have a thick white border.
+#| echo: false
+#| message: false
+#| layout-ncol: 2
+#| fig-width: 3
+#| fig-alt: |
+#|   There are six scatterplots in this figure, arranged in a 3x2 grid. 
+#|   In all plots highway fuel efficiency of cars are on the y-axis and 
+#|   engine size is on the x-axis. The **first** plot shows all points in black
+#|   with a smooth curve overlaid on them. In the **second** plot points are 
+#|   also all black, with separate smooth curves overlaid for each level of 
+#|   drive train. On the **third** plot, points and the smooth curves are 
+#|   represented in different colors for each level of drive train. In the 
+#|   **fourth** plot the points are represented in different colors for each 
+#|   level of drive train but there is only a single smooth line fitted to 
+#|   the whole data. In the **fifth** plot, points are represented in different
+#|   colors for each level of drive train, and a separate smooth curve with 
+#|   line types are fitted to each level of drive train. And 
+#|   finally in the **sixth** plot points are represented in different colors 
+#|   for each level of drive train and they have a thick white border.
 
     ggplot(mpg, aes(x = displ, y = hwy)) + 
       geom_point() + 
@@ -623,22 +585,12 @@ ggplot(mpg, aes(x = displ, y = hwy)) +
 
 1.  What happens if you facet on a continuous variable?
 
-2.  What do the empty cells in the plot above with `facet_grid(drv ~ cyl)` mean?
-    Run the following code.
-    How do they relate to the resulting plot?
+2.  What do the empty cells in the plot above with `facet_grid(drv ~ cyl)` mean? Run the following code. How do they relate to the resulting plot?
+
+3.  What plots does the following code make? What does `.` do?
 
 ```{r}
-    #| fig-show: hide
-
-    ggplot(mpg) + 
-      geom_point(aes(x = drv, y = cyl))
-```
-
-3.  What plots does the following code make?
-    What does `.` do?
-
-```{r}
-    #| fig-show: hide
+#| fig-show: hide
 
     ggplot(mpg) + 
       geom_point(aes(x = displ, y = hwy)) +
@@ -652,29 +604,25 @@ ggplot(mpg, aes(x = displ, y = hwy)) +
 4.  Take the first faceted plot in this section:
 
 ```{r}
-    #| fig-show: hide
+#| fig-show: hide
 
     ggplot(mpg) + 
       geom_point(aes(x = displ, y = hwy)) + 
       facet_wrap(~ class, nrow = 2)
 ```
 
-    What are the advantages to using faceting instead of the color aesthetic?
-    What are the disadvantages?
-    How might the balance change if you had a larger dataset?
+      
+What are the advantages to using faceting instead of the color aesthetic?
 
-5.  Read `?facet_wrap`.
-    What does `nrow` do?
-    What does `ncol` do?
-    What other options control the layout of the individual panels?
-    Why doesn't `facet_grid()` have `nrow` and `ncol` arguments?
+What are the disadvantages?
 
-6.  Which of the following plots makes it easier to compare engine size (`displ`) across cars with different drive trains?
-    What does this say about when to place a faceting variable across rows or columns?
+5.  Read `?facet_wrap`. What does `nrow` do? What does `ncol` do? What other options control the layout of the individual panels? Why doesn't `facet_grid()` have `nrow` and `ncol` arguments?
+
+6.  Which of the following plots makes it easier to compare engine size (`displ`) across cars with different drive trains? What does this say about when to place a faceting variable across rows or columns?
 
 ```{r}
-    #| fig-show: hide
-    #| message: false
+#| fig-show: hide
+#| message: false
 
     ggplot(mpg, aes(x = displ)) + 
       geom_histogram() + 
@@ -685,16 +633,17 @@ ggplot(mpg, aes(x = displ, y = hwy)) +
       facet_grid(. ~ drv)
 ```
 
-7.  Recreate the following plot using `facet_wrap()` instead of `facet_grid()`.
-    How do the positions of the facet labels change?
+
+7.  Recreate the following plot using `facet_wrap()` instead of `facet_grid()`. How do the positions of the facet labels change?
 
 ```{r}
-    #| fig-show: hide
+#| fig-show: hide
 
     ggplot(mpg) + 
       geom_point(aes(x = displ, y = hwy)) +
       facet_grid(drv ~ .)
 ```
+
 
 ## Statistical transformations
 
@@ -812,26 +761,19 @@ Each stat is a function, so you can get help in the usual way, e.g., `?stat_bin`
 
 ## 2.5.1 Exercises {.unnumbered}
 
-1.  What is the default geom associated with `stat_summary()`?
-    How could you rewrite the previous plot to use that geom function instead of the stat function?
+1.  What is the default geom associated with `stat_summary()`? How could you rewrite the previous plot to use that geom function instead of the stat function?
 
-2.  What does `geom_col()` do?
-    How is it different from `geom_bar()`?
 
-3.  Most geoms and stats come in pairs that are almost always used in concert.
-    Make a list of all the pairs.
-    What do they have in common?
-    (Hint: Read through the documentation.)
+2.  What does `geom_col()` do? How is it different from `geom_bar()`?
 
-4.  What variables does `stat_smooth()` compute?
-    What arguments control its behavior?
+3.  Most geoms and stats come in pairs that are almost always used in concert. Make a list of all the pairs. What do they have in common? (Hint: Read through the documentation.)
 
-5.  In our proportion bar chart, we needed to set `group = 1`.
-    Why?
-    In other words, what is the problem with these two graphs?
+4.  What variables does `stat_smooth()` compute? What arguments control its behavior?
+
+5.  In our proportion bar chart, we needed to set `group = 1`. Why? In other words, what is the problem with these two graphs?
 
 ```{r}
-    #| fig-show: hide
+#| fig-show: hide
 
     ggplot(diamonds, aes(x = cut, y = after_stat(prop))) + 
       geom_bar()
@@ -975,21 +917,20 @@ To learn more about a position adjustment, look up the help page associated with
 
 ## 2.6.1 Exercises {.unnumbered}
 
-1.  What is the problem with the following plot?
-    How could you improve it?
+1.  What is the problem with the following plot? How could you improve it?
 
 ```{r}
-    #| fig-show: hide
+#| fig-show: hide
 
     ggplot(mpg, aes(x = cty, y = hwy)) + 
       geom_point()
 ```
 
-2.  What, if anything, is the difference between the two plots?
-    Why?
+
+2.  What, if anything, is the difference between the two plots? Why?
 
 ```{r}
-    #| fig-show: hide
+#| fig-show: hide
 
     ggplot(mpg, aes(x = displ, y = hwy)) +
       geom_point()
@@ -999,10 +940,9 @@ To learn more about a position adjustment, look up the help page associated with
 
 3.  What parameters to `geom_jitter()` control the amount of jittering?
 
-4.  Compare and contrast `geom_jitter()` with `geom_count()`.
+4.  Compare and contrast `geom_jitter()` with `geom_count()`
 
-5.  What's the default position adjustment for `geom_boxplot()`?
-    Create a visualization of the `mpg` dataset that demonstrates it.
+5.  What's the default position adjustment for `geom_boxplot()`? Create a visualization of the `mpg` dataset that demonstrates it.
 
 ## The layered grammar of graphics
 

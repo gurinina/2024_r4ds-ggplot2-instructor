@@ -1,3 +1,8 @@
+knitr::knit_engines$set(details = function(options) {
+  details::details
+  # the source code is in options$code; just do
+  # whatever you want with it
+})
 
 
 knitr::opts_chunk$set(
@@ -5,21 +10,21 @@ knitr::opts_chunk$set(
   fig.asp = 2/3,
   message = FALSE,
   warning = FALSE,
-  tidy = FALSE,
-  # tidy.opts = list(arrow=TRUE),
+  tidy = TRUE,
+  tidy.opts = list(arrow=TRUE),
   fig.show = 'hold',
   collapse = TRUE
 )
 
-# options(
-#   dplyr.print_min = 6,
-#   dplyr.print_max = 6,
-#   pillar.max_footer_lines = 2,
-#   pillar.min_chars = 15,
-#   stringr.view_n = 6,
-#   pillar.bold = TRUE,
-#   # width = 77 # 80 - 3 for #> comment
-# )
+options(
+  dplyr.print_min = 6,
+  dplyr.print_max = 6,
+  pillar.max_footer_lines = 2,
+  pillar.min_chars = 15,
+  stringr.view_n = 6,
+  pillar.bold = TRUE,
+  width = 60# 80 - 3 for #> comment
+)
 # local({
 #   hook_source <- knitr::knit_hooks$get('chunk')
 #   knitr::knit_hooks$set(source = function(x, options) {
@@ -36,7 +41,7 @@ ggplot2::theme_set(ggplot2::theme_bw())
         '<button class="btn btn-primary" data-toggle="collapse" data-target="#',
         rnd_id, '">',
         options$button, '</button> <div id="',
-        rnd_id, '" class="collapse">',
+        rnd_id, '" class="pre">',
         x, '</div>')
     } else {
       x
