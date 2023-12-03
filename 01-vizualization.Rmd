@@ -34,7 +34,6 @@ This chapter focuses on ggplot2, one of the core packages in the tidyverse.
 To access the datasets, help pages, and functions used in this chapter, load the tidyverse by running:
 
 ```{r}
-#| label: setup
 
 library(tidyverse)
 ```
@@ -383,7 +382,7 @@ We finally have a plot that perfectly matches our "ultimate goal"!
 
 5.  Why does the following give an error and how would you fix it?
 
-    ```{r}
+    ```{r, eval=FALSE}
     #| eval: false
 
     ggplot(data = penguins) + 
@@ -643,7 +642,7 @@ As shown in @fig-eda-boxplot, each boxplot consists of:
 #|   A diagram depicting how a boxplot is created following the steps outlined 
 #|   above.
 
-knitr::include_graphics("images/EDA-boxplot.png")
+##knitr::include_graphics("images/EDA-boxplot.png")
 ```
 
 Let's take a look at the distribution of body mass by species using `geom_boxplot()`:

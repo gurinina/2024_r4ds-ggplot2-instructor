@@ -1,8 +1,8 @@
 bookdown::gitbook:
-  css: [css/styl.css,css/toc.css]
-  stylesheet: css/styl.css
+  css: [css/git.css,css/toc.css]
   includes:
     in_header: includes/header.html
+    highlight: tango
     after_body: "scripts/collapse-output.html"
   df_print: kable
   config:
@@ -22,8 +22,8 @@ bookdown::word_document2:
 bookdown::html_chapters:
   includes:
     in_header: includes/header.html
-    after_body: "scripts/uncover.html"
-  css: [css/styl.css,css/toc.css]
+    after_body: "scripts/.collapse-output.html"
+  css: [css/git.css,css/toc.css]
 bookdown::pdf_book:
   includes:
    in_header: lessons/preamble.tex
@@ -42,9 +42,9 @@ bookdown::epub_book:
     in_header: includes/header.html
     after_body: "scripts/uncover.html"
   dev: svglite
-  stylesheet: css/styl.css
+  gitesheet: css/git.css
 bookdown::bs4_book:
   includes:
     in_header: includes/header.html
     after_body: "scripts/uncover.html"
-  stylesheet: css/styl.css
+    stylesheet: css/git.css
