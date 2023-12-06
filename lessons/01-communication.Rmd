@@ -672,7 +672,7 @@ These scales are available as continuous (`c`), discrete (`d`), and binned (`b`)
 
 ```{r}
 #| fig-show: hold
-#| fig-width: 3
+#| fig-width: 8
 #| fig-asp: 0.75
 #| fig-alt: |
 #|   Three hex plots where the color of the hexes show the number of observations 
@@ -686,9 +686,13 @@ df <- tibble(
 )
 
 ggplot(df, aes(x, y)) + geom_hex() +
-  labs(title = "Default, continuous", x = NULL, y = NULL) | ggplot(df, aes(x, y)) + geom_hex() +
+  labs(title = "Default, continuous", x = NULL, y = NULL) 
+
+ggplot(df, aes(x, y)) + geom_hex() +
   scale_fill_viridis_c() +
-  labs(title = "Viridis, continuous", x = NULL, y = NULL) | ggplot(df, aes(x, y)) + geom_hex() +
+  labs(title = "Viridis, continuous", x = NULL, y = NULL) 
+
+ggplot(df, aes(x, y)) + geom_hex() +
   scale_fill_viridis_b() +
   labs(title = "Viridis, binned", x = NULL, y = NULL)
 ```
