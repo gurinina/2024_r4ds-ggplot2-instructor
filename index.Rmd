@@ -13,8 +13,6 @@ documentclass: book
 cover-image: "images/koos10.png"
 ---
 
-
-<link rel="stylesheet" href="css/ggplot.css" type="text/css" />
 # r for data science workshop {-}
 
 This website us the ggplot visulization sections of Hadley Wickham's book [2nd edition of "R for Data Science"](https://r4ds.hadley.nz/).

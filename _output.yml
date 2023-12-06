@@ -8,6 +8,9 @@ bookdown::gitbook:
   config:
     toc:
       collapse: section
+      scroll_highlight: true
+      before: null
+      after: null
     sharing:
       github: yes
       facebook: no
@@ -22,7 +25,7 @@ bookdown::word_document2:
 bookdown::html_chapters:
   includes:
     in_header: includes/header.html
-    after_body: "scripts/.collapse-output.html"
+    after_body: "scripts/collapse-output.html"
   css: [css/git.css,css/toc.css]
 bookdown::pdf_book:
   includes:

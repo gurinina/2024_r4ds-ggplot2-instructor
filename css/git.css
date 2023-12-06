@@ -78,27 +78,36 @@ details[open] {
 
 details summary {
 background-color: #000080;
+
+  font-size: 12px!important;
   color: #FFFFFF;
   border-bottom: 1px solid black;
   margin-bottom: 0.5em;
 }
 details[open] summary {
-background-color: #E8D6FF;
+  
+  font-size: 12px!important;
+  background-color: #E8D6FF;
   color: #000080;
   border-bottom: 1px solid black;
   margin-bottom: 0.5em;
 }
 
-
+.book .book-body .page-wrapper .page-inner section.normal *{
+  
+  font-size: 12px!important;
+  
+}
 p code {
   white-space: inherit;
-  color: red!important;
+  color: darkred!important;
+  background: #FFFFFF!important;
 }
 
 .book .book-body .page-wrapper .page-inner section.normal pre {
   word-break: normal;
   /* word-wrap: normal;*/
-  font-size: 12px;
+  font-size: 12px!important;
   border: 1px solid black!important;
   white-space: pre-wrap;
   background: #E7E1FB!important;

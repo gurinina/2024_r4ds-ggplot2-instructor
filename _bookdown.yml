@@ -2,6 +2,7 @@ book_filename: "r4ds-ggplot2"
 new_session: no
 rmd_files:
   - index.Rmd
+  - lessons/01-communication.Rmd
   - lessons/02-layers.Rmd
   - lessons/03-dummy-script.Rmd
 delete_merged_file: false
