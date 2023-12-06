@@ -35,7 +35,6 @@ Uncomment the following line if you need to install any of these packages (you s
 ```{r}
 #| label: setup
 
-
 library(tidyverse)
 library(scales)
 library(ggrepel)
@@ -200,9 +199,11 @@ ggplot(mpg, aes(x = displ, y = hwy, color = drv)) +
   geom_point(alpha = 0.3) +
   geom_smooth(se = FALSE) +
   geom_label_repel(
-    data = label_info, 
+    data = label_info,
     aes(x = displ, y = hwy, label = drive_type),
-    fontface = "bold", size = 5, nudge_y = 2
+    fontface = "bold",
+    size = 5,
+    nudge_y = 2
   ) +
   theme(legend.position = "none")
 ```
@@ -226,7 +227,9 @@ ggplot(mpg, aes(x = displ, y = hwy)) +
   geom_point(data = potential_outliers, color = "red") +
   geom_point(
     data = potential_outliers,
-    color = "red", size = 3, shape = "circle open"
+    color = "red",
+    size = 3,
+    shape = "circle open"
   )
 ```
 
@@ -251,8 +254,8 @@ To demonstrate using `annotate()`, let's create some text to add to our plot.
 The text is a bit long, so we'll use `stringr::str_wrap()` to automatically add line breaks to it given the number of characters you want per line:
 
 ```{r}
-trend_text <- "Larger engine sizes tend to have lower fuel economy." |>
-  str_wrap(width = 30)
+trend_text <- "Larger engine sizes tend to have lower fuel economy." |> str_wrap(width = 30)
+
 trend_text
 ```
 
@@ -566,8 +569,7 @@ For example, it's easier to see the precise relationship between `carat` and `pr
 
 # Left-# Right
 ggplot(diamonds, aes(x = carat, y = price)) +
-  geom_bin2d() + ggplot(diamonds, aes(x = log10(carat), y = log10(price))) +
-  geom_bin2d()
+  geom_bin2d() + ggplot(diamonds, aes(x = log10(carat), y = log10(price))) + geom_bin2d()
 ```
 
 However, the disadvantage of this transformation is that the axes are now labelled with the transformed values, making it hard to interpret the plot.
@@ -825,14 +827,12 @@ In this particular case, you could have simply used faceting, but this technique
 ```{r}
     #| fig-show: "hide"
 
-    df <- tibble(
-      x = rnorm(10000),
-      y = rnorm(10000)
-    )
+df <- tibble(x = rnorm(10000),
+             y = rnorm(10000))
 
-    ggplot(df, aes(x, y)) +
-      geom_hex(aes(x,y)) +
-      scale_color_gradient(low = "white", high = "red") 
+ggplot(df, aes(x, y)) +
+  geom_hex(aes(x, y)) +
+  scale_color_gradient(low = "white", high = "red") 
 ```
 
 
@@ -853,8 +853,8 @@ Ans: 1.4.1.2
 ```{r}
     #| fig-show: hide
 
-    ggplot(diamonds, aes(x = carat, y = price)) +
-      geom_point(aes(color = cut), alpha = 1/20)
+ggplot(diamonds, aes(x = carat, y = price)) +
+  geom_point(aes(color = cut), alpha = 1 / 20)
 ```
 
 
@@ -1034,45 +1034,43 @@ Patchwork divides up the area you have allotted for your plot using this scale a
 #| fig-width: 8
 #| fig-asp: 1
 #| fig-alt: |
-#|   Five plots laid out such that first two plots are next to each other. Plots 
-#|   three and four are underneath them. And the fifth plot stretches under them. 
-#|   The patchworked plot is titled "City and highway mileage for cars with 
-#|   different drive trains" and captioned "Source: https://fueleconomy.gov". 
-#|   The first two plots are side-by-side box plots. Plots 3 and 4 are density 
-#|   plots. And the fifth plot is a faceted scatterplot. Each of these plots show 
-#|   geoms colored by drive train, but the patchworked plot has only one legend 
+#|   Five plots laid out such that first two plots are next to each other. Plots
+#|   three and four are underneath them. And the fifth plot stretches under them.
+#|   The patchworked plot is titled "City and highway mileage for cars with
+#|   different drive trains" and captioned "Source: https://fueleconomy.gov".
+#|   The first two plots are side-by-side box plots. Plots 3 and 4 are density
+#|   plots. And the fifth plot is a faceted scatterplot. Each of these plots show
+#|   geoms colored by drive train, but the patchworked plot has only one legend
 #|   that applies to all of them, above the plots and beneath the title.
 
-p1 <- ggplot(mpg, aes(x = drv, y = cty, color = drv)) + 
-  geom_boxplot(show.legend = FALSE) + 
+p1 <- ggplot(mpg, aes(x = drv, y = cty, color = drv)) +
+  geom_boxplot(show.legend = FALSE) +
   labs(title = "Plot 1")
 
-p2 <- ggplot(mpg, aes(x = drv, y = hwy, color = drv)) + 
-  geom_boxplot(show.legend = FALSE) + 
+p2 <- ggplot(mpg, aes(x = drv, y = hwy, color = drv)) +
+  geom_boxplot(show.legend = FALSE) +
   labs(title = "Plot 2")
 
-p3 <- ggplot(mpg, aes(x = cty, color = drv, fill = drv)) + 
-  geom_density(alpha = 0.5) + 
+p3 <- ggplot(mpg, aes(x = cty, color = drv, fill = drv)) +
+  geom_density(alpha = 0.5) +
   labs(title = "Plot 3")
 
-p4 <- ggplot(mpg, aes(x = hwy, color = drv, fill = drv)) + 
-  geom_density(alpha = 0.5) + 
+p4 <- ggplot(mpg, aes(x = hwy, color = drv, fill = drv)) +
+  geom_density(alpha = 0.5) +
   labs(title = "Plot 4")
 
-p5 <- ggplot(mpg, aes(x = cty, y = hwy, color = drv)) + 
-  geom_point(show.legend = FALSE) + 
-  facet_wrap(~drv) +
+p5 <- ggplot(mpg, aes(x = cty, y = hwy, color = drv)) +
+  geom_point(show.legend = FALSE) +
+  facet_wrap( ~ drv) +
   labs(title = "Plot 5")
 
-(guide_area() / (p1 + p2) / (p3 + p4) / p5) +
-  plot_annotation(
-    title = "City and highway mileage for cars with different drive trains",
-    caption = "Source: https://fueleconomy.gov."
-  ) +
-  plot_layout(
-    guides = "collect",
-    heights = c(1, 3, 2, 4)
-    ) &
+(
+  guide_area() / (p1 + p2) / (p3 + p4) / p5
+) +
+  plot_annotation(title = "City and highway mileage for cars with different drive trains",
+                  caption = "Source: https://fueleconomy.gov.") +
+  plot_layout(guides = "collect",
+              heights = c(1, 3, 2, 4)) &
   theme(legend.position = "top")
 ```
 

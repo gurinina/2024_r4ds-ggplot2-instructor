@@ -1,7 +1,6 @@
 # Layers 
 
-```{r}
-# set global options
+```{r set global options}
 source("_common.R")
 ```
 
@@ -35,8 +34,6 @@ library(patchwork)
 ```
 
 ## Aesthetic mappings 
-
-> "The greatest value of a picture is when it forces us to notice what we never expected to see." --- John Tukey
 
 The `mpg` data frame is bundled with the ggplot2 package and contains `r nrow(mpg)` observations on `r mpg %>% distinct(model) %>% nrow()` car models.
 
@@ -124,7 +121,7 @@ Similarly, we can map `class` to `size` or `alpha` aesthetics as well, which con
 
 ggplot(mpg, aes(x = displ, y = hwy, size = class)) +
   geom_point() + ggplot(mpg, aes(x = displ, y = hwy, alpha = class)) +
-  geom_point() +   plot_layout(ncol = 2)
+  geom_point() + plot_layout(ncol = 2)
 ```
 
 Both of these produce warnings as well:
@@ -187,15 +184,15 @@ shapes <- tibble(
   x = (0:24 %/% 5) / 2,
   y = (-(0:24 %% 5)) / 4
 )
-ggplot(shapes, aes(x, y)) + 
+ggplot(shapes, aes(x, y)) +
   geom_point(aes(shape = shape), size = 5, fill = "red") +
   geom_text(aes(label = shape), hjust = 0, nudge_x = 0.15) +
   scale_shape_identity() +
   expand_limits(x = 4.1) +
-  scale_x_continuous(NULL, breaks = NULL) + 
-  scale_y_continuous(NULL, breaks = NULL, limits = c(-1.2, 0.2)) + 
+  scale_x_continuous(NULL, breaks = NULL) +
+  scale_y_continuous(NULL, breaks = NULL, limits = c(-1.2, 0.2)) +
   theme_minimal() +
-  theme(aspect.ratio = 1/2.75)
+  theme(aspect.ratio = 1 / 2.75)
 ```
 
 So far we have discussed aesthetics that we can map or set in a scatterplot, when using a point geom.
@@ -204,7 +201,7 @@ You can learn more about all possible aesthetic mappings in the aesthetic specif
 The specific aesthetics you can use for a plot depend on the geom you use to represent the data.
 In the next section we dive deeper into geoms.
 
-## 2.2.1 Exercises {.unnumbered}
+### 2.2.1 Exercises {.unnumbered}
 
 1.  Create a scatterplot of `hwy` vs. `displ` where the points are pink filled in triangles.
 
@@ -222,8 +219,8 @@ In the next section we dive deeper into geoms.
 #|   that shows a negative association. All points are red and 
 #|   the legend shows a red point that is mapped to the word blue.
 
-    ggplot(mpg) + 
-      geom_point(aes(x = displ, y = hwy, color = "blue"))
+ggplot(mpg) +
+  geom_point(aes(x = displ, y = hwy, color = "blue"))
 ```
 
 
@@ -240,8 +237,7 @@ Ans: 2.2.1.3:
 4.  What happens if you map an aesthetic to something other than a variable name, like `aes(color = displ < 5)`? Try it by adding color to the following plot. 
 
 ```{r}
- ggplot(mpg) + 
-      geom_point(aes(x = displ, y = hwy))
+ggplot(mpg) + geom_point(aes(x = displ, y = hwy))
 ```
 
 
@@ -264,11 +260,9 @@ How are these two plots similar?
 #|   between these variables. A confidence interval around the smooth 
 #|   curve is also displayed.
 
-ggplot(mpg, aes(x = displ, y = hwy)) + 
-  geom_point() 
+ggplot(mpg, aes(x = displ, y = hwy)) + geom_point() 
 
-ggplot(mpg, aes(x = displ, y = hwy)) + 
-  geom_smooth()
+ggplot(mpg, aes(x = displ, y = hwy)) + geom_smooth()
 ```
 
 Both plots contain the same x variable, the same y variable, and both describe the same data. But the plots are not identical. Each plot uses a different geometric object, geom, to represent the data. The plot on the left uses the point geom, and the plot on the right uses the smooth geom, a smooth line fitted to the data.
@@ -279,12 +273,10 @@ To change the geom in your plot, change the geom function that you add to `ggplo
 #| fig-show: 'hold'
 
 # Top
-ggplot(mpg, aes(x = displ, y = hwy)) + 
-  geom_point() 
+ggplot(mpg, aes(x = displ, y = hwy)) + geom_point() 
 
 # Bottom
-ggplot(mpg, aes(x = displ, y = hwy)) + 
-  geom_smooth()
+ggplot(mpg, aes(x = displ, y = hwy)) + geom_smooth()
 ```
 
 Every geom function in ggplot2 takes a `mapping` argument, either defined locally in the geom layer or globally in the `ggplot()` layer.
@@ -305,8 +297,7 @@ You could set the shape of a point, but you couldn't set the "shape" of a line. 
 #|   intervals around the smooth curves are also displayed.
 
 # Top
-ggplot(mpg, aes(x = displ, y = hwy, shape = drv)) + 
-  geom_smooth()
+ggplot(mpg, aes(x = displ, y = hwy, shape = drv)) + geom_smooth()
 
 # Bottom
 ggplot(mpg, aes(x = displ, y = hwy, linetype = drv)) + geom_smooth()
@@ -363,17 +354,17 @@ You can use the same idea to specify different `data` for each layer. Here, we u
 #|   engine size of subcompact cars is overlaid along with a confidence interval 
 #|   around it.
 
-g <- ggplot(mpg, aes(x = displ, y = hwy)) + 
-  geom_point() + 
-  geom_point(
-    data = mpg %>% filter(class == '2seater'), 
-    color = "red"
-  ) 
+g <- ggplot(mpg, aes(x = displ, y = hwy)) +
+  geom_point() +
+  geom_point(data = mpg %>% filter(class == '2seater'),
+             color = "red")
 
 g + geom_point(
-    data = mpg %>% filter(class == '2seater'), 
-    shape = "circle open", size = 3, color = "red"
-  )
+  data = mpg %>% filter(class == '2seater'),
+  shape = "circle open",
+  size = 3,
+  color = "red"
+)
 ```
 
 Geoms are the fundamental building blocks of ggplot2. You can completely transform the look of your plot by changing its geom, and different geoms can reveal different features of your data.
@@ -386,16 +377,13 @@ For example, the histogram and density plot below reveal that the distribution o
 #|   mileage.
  
 # Top
-ggplot(mpg, aes(x = hwy)) +
-  geom_histogram(binwidth = 2)
+ggplot(mpg, aes(x = hwy)) + geom_histogram(binwidth = 2)
 
 # Middle
-ggplot(mpg, aes(x = hwy)) +
-  geom_density()
+ggplot(mpg, aes(x = hwy)) + geom_density()
 
 # Bottom
-ggplot(mpg, aes(x = hwy)) +
-  geom_boxplot()
+ggplot(mpg, aes(x = hwy)) + geom_boxplot()
 ```
 
 ggplot2 provides more than 40 geoms but these don't cover all possible plots one could make.
@@ -423,7 +411,7 @@ ggplot(mpg, aes(x = hwy, y = drv, fill = drv, color = drv)) +
 The best place to get a comprehensive overview of all of the geoms ggplot2 offers, as well as all functions in the package, is the reference page: <https://ggplot2.tidyverse.org/reference>.
 To learn more about any single geom, use the help (e.g., `?geom_smooth`).
 
-## 2.3.1 Exercises {.unnumbered}
+### 2.3.1 Exercises {.unnumbered}
 
 1.  What geom would you use to draw a line chart? A boxplot? A histogram? An area chart?
 
@@ -438,6 +426,7 @@ df <- data.frame(
   y = c(2, 4, 6), 
   label = c("a","b","c")
 )
+
 p <- ggplot(df, aes(x, y, label = label))  
   
 ```
@@ -452,8 +441,8 @@ p <- ggplot(df, aes(x, y, label = label))
 
 ```{r}
 
-    ggplot(mpg, aes(x = displ, y = hwy)) +
-      geom_smooth(aes(color = drv), show.legend = FALSE)
+ggplot(mpg, aes(x = displ, y = hwy)) +
+  geom_smooth(aes(color = drv), show.legend = FALSE)
 ```
 
     
@@ -491,24 +480,24 @@ Ans: 2.3.1.3:
 #|   finally in the **sixth** plot points are represented in different colors 
 #|   for each level of drive train and they have a thick white border.
 
-    ggplot(mpg, aes(x = displ, y = hwy)) + 
-      geom_point() + 
-      geom_smooth(se = FALSE)
-    ggplot(mpg, aes(x = displ, y = hwy)) + 
-      geom_smooth(aes(group = drv), se = FALSE) +
-      geom_point()
-    ggplot(mpg, aes(x = displ, y = hwy, color = drv)) + 
-      geom_point() + 
-      geom_smooth(se = FALSE)
-    ggplot(mpg, aes(x = displ, y = hwy)) + 
-      geom_point(aes(color = drv)) + 
-      geom_smooth(se = FALSE)
-    ggplot(mpg, aes(x = displ, y = hwy)) + 
-      geom_point(aes(color = drv)) +
-      geom_smooth(aes(linetype = drv), se = FALSE)
-    ggplot(mpg, aes(x = displ, y = hwy)) + 
-      geom_point(size = 4, color = "white") + 
-      geom_point(aes(color = drv))
+ggplot(mpg, aes(x = displ, y = hwy)) +
+  geom_point() +
+  geom_smooth(se = FALSE)
+ggplot(mpg, aes(x = displ, y = hwy)) +
+  geom_smooth(aes(group = drv), se = FALSE) +
+  geom_point()
+ggplot(mpg, aes(x = displ, y = hwy, color = drv)) +
+  geom_point() +
+  geom_smooth(se = FALSE)
+ggplot(mpg, aes(x = displ, y = hwy)) +
+  geom_point(aes(color = drv)) +
+  geom_smooth(se = FALSE)
+ggplot(mpg, aes(x = displ, y = hwy)) +
+  geom_point(aes(color = drv)) +
+  geom_smooth(aes(linetype = drv), se = FALSE)
+ggplot(mpg, aes(x = displ, y = hwy)) +
+  geom_point(size = 4, color = "white") +
+  geom_point(aes(color = drv))
 ```
 
 The code for each of the plots is given below.
@@ -536,8 +525,7 @@ Here "formula" is the name of the thing created by `~`, not a synonym for "equat
 #|   faceted by class, with facets spanning two rows.
 
 ggplot(mpg, aes(x = displ, y = hwy)) + 
-  geom_point() + 
-  facet_wrap(~cyl)
+  geom_point() + facet_wrap(~cyl)
 ```
 
 To facet your plot with the combination of two variables, switch from `facet_wrap()` to `facet_grid()`.
@@ -551,8 +539,8 @@ The first argument of `facet_grid()` is also a formula, but now it's a double si
 #|   no observations: 5 cylinders and 4 wheel drive, 4 or 5 cylinders and front 
 #|   wheel drive.
 
-ggplot(mpg, aes(x = displ, y = hwy)) + 
-  geom_point() + 
+ggplot(mpg, aes(x = displ, y = hwy)) +
+  geom_point() +
   facet_grid(drv ~ cyl)
 ```
 
@@ -571,8 +559,9 @@ Setting the `scales` argument in a faceting function to `"free"` will allow for 
 #|   cylinders and front wheel drive. Facets within a row share the same 
 #|   y-scale and facets within a column share the same x-scale.
 
-ggplot(mpg, aes(x = displ, y = hwy)) + 
-  geom_point() + 
+
+ggplot(mpg, aes(x = displ, y = hwy)) +
+  geom_point() +
   facet_grid(drv ~ cyl, scales = "free_y")
 ```
 
@@ -581,22 +570,38 @@ Modifying facet label appearance:
 
 ```{r}
 
-ggplot(mpg, aes(x = displ, y = hwy)) + 
-  geom_point() + 
+
+ggplot(mpg, aes(x = displ, y = hwy)) +
+  geom_point() +
   facet_grid(drv ~ cyl) +
-  theme(strip.text.x = element_text(size=12, face="bold",colour="blue",angle=75),strip.text.y = element_text(size=14, face="bold",colour="red"),
-  strip.background = element_rect(colour="navy", fill="#CCCCFF", linewidth  = 2))
+  theme(
+    strip.text.x = element_text(
+      size = 12,
+      face = "bold",
+      colour = "blue",
+      angle = 75
+    ),
+    strip.text.y = element_text(
+      size = 14,
+      face = "bold",
+      colour = "red"
+    ),
+    strip.background = element_rect(
+      colour = "navy",
+      fill = "#CCCCFF",
+      linewidth  = 2
+    )
+  )
 ```
 
 
 
-## 2.4.1 Exercises {.unnumbered}
+### 2.4.1 Exercises {.unnumbered}
 
 1.  What happens if you facet on a continuous variable? Try it on the. plot below and facet on `hwy`.
 
 ```{r}
-    ggplot(mpg, aes(x = drv, y = cyl)) + 
-      geom_point() 
+ggplot(mpg, aes(x = drv, y = cyl)) + geom_point() 
 ```
 
 ```{r Ans: 2.4.1.1}
@@ -608,8 +613,7 @@ ggplot(mpg, aes(x = displ, y = hwy)) +
 
 ```{r}
 
-    ggplot(mpg) + 
-      geom_point(aes(x = drv, y = cyl))
+ggplot(mpg) + geom_point(aes(x = drv, y = cyl))
 ```
 
 
@@ -623,13 +627,14 @@ ggplot(mpg, aes(x = displ, y = hwy)) +
 ```{r}
 #| fig-show: "hold"
 
-    ggplot(mpg) + 
-      geom_point(aes(x = displ, y = hwy)) +
-      facet_grid(drv ~ .)
 
-    ggplot(mpg) + 
-      geom_point(aes(x = displ, y = hwy)) +
-      facet_grid(. ~ cyl)
+ggplot(mpg) +
+  geom_point(aes(x = displ, y = hwy)) +
+  facet_grid(drv ~ .)
+
+ggplot(mpg) +
+  geom_point(aes(x = displ, y = hwy)) +
+  facet_grid(. ~ cyl)
 ```
 
 
@@ -639,9 +644,9 @@ Ans: 2.4.1.3:
 
 ```{r}
 
-    ggplot(mpg) + 
-      geom_point(aes(x = displ, y = hwy)) + 
-      facet_wrap(~ class, nrow = 2)
+ggplot(mpg) +
+  geom_point(aes(x = displ, y = hwy)) +
+  facet_wrap( ~ class, nrow = 2)
 ```
 
       
@@ -654,8 +659,8 @@ Ans: 2.4.1.4a:
 What if you were interested in a specific class, e.g. compact cars? How would highlight that group only using an additional layer added to the plot below?
 
 ```{r}
-   ggplot(mpg, aes(x = displ, y = hwy)) + 
-      geom_point(color = "gray") 
+ggplot(mpg, aes(x = displ, y = hwy)) +
+  geom_point(color = "gray") 
 ```
 
 
@@ -672,13 +677,13 @@ Ans: 2.4.1.5:
 
 ```{r Ans: 2.4.1.6}
 
-    ggplot(mpg, aes(x = displ)) + 
-      geom_histogram() + 
-      facet_grid(drv ~ .) 
+ggplot(mpg, aes(x = displ)) +
+  geom_histogram() +
+  facet_grid(drv ~ .)
 
-    ggplot(mpg, aes(x = displ)) + 
-      geom_histogram() +
-      facet_grid(. ~ drv)
+ggplot(mpg, aes(x = displ)) +
+  geom_histogram() +
+  facet_grid(. ~ drv)
 ```
 
 
@@ -688,9 +693,9 @@ Ans: 2.4.1.6:
 
 ```{r}
 
-ggplot(mpg) + 
-      geom_point(aes(x = displ, y = hwy)) +
-      facet_grid(drv ~ .)
+ggplot(mpg) +
+  geom_point(aes(x = displ, y = hwy)) +
+  facet_grid(drv ~ .)
 ```
 
 
@@ -763,14 +768,12 @@ However, there are three reasons why you might need to use a stat explicitly:
 ```{r}
     #| 
     #| fig-alt: |
-    #|   Bar chart of number of each cut of diamond. There are roughly 1500 
-    #|   Fair, 5000 Good, 12000 Very Good, 14000 Premium, and 22000 Ideal cut 
-    #|   diamonds.
+    #| Bar chart of number of each cut of diamond. There are roughly 1500 Fair, 5000 Good, 12000 Very Good, 14000 Premium, and 22000 Ideal cut diamonds.
 
-    diamonds %>%
-      count(cut) %>%
-      ggplot(aes(x = cut, y = n)) +
-      geom_bar(stat = "identity")
+diamonds %>%
+  count(cut) %>%
+  ggplot(aes(x = cut, y = n)) +
+  geom_bar(stat = "identity")
 ```
 
 2.  You might want to override the default mapping from transformed variables to aesthetics.
@@ -783,8 +786,8 @@ However, there are three reasons why you might need to use a stat explicitly:
     #|   diamonds make up 0.03, Good 0.09, Very Good 0.22, Premium 0.26, and 
     #|   Ideal 0.40.
 
-    ggplot(diamonds, aes(x = cut, y = after_stat(prop), group = 1)) + 
-      geom_bar()
+ggplot(diamonds, aes(x = cut, y = after_stat(prop), group = 1)) +
+  geom_bar()
 ```
 
     To find the possible variables that can be computed by the stat, look for the section titled "computed variables" in the help for `geom_bar()`.
@@ -800,19 +803,20 @@ However, there are three reasons why you might need to use a stat explicitly:
     #|   in that cut category, and the median depth is indicated on the line 
     #|   with a point.
 
-    ggplot(diamonds) + 
-      stat_summary(
-        aes(x = cut, y = depth),
-        fun.min = min,
-        fun.max = max,
-        fun = median
-      )
+
+ggplot(diamonds) +
+  stat_summary(
+    aes(x = cut, y = depth),
+    fun.min = min,
+    fun.max = max,
+    fun = median
+  )
 ```
 
 ggplot2 provides more than 20 stats for you to use.
 Each stat is a function, so you can get help in the usual way, e.g., `?stat_bin`.
 
-## 2.5.1 Exercises {.unnumbered}
+### 2.5.1 Exercises {.unnumbered}
 
 1.  What is the default geom associated with `stat_summary()`? How could you rewrite the previous plot to use that geom function instead of the stat function?
 
@@ -898,7 +902,7 @@ Each colored rectangle represents a combination of `drv` and `class`.
 #|   segments are proportional to the number of cars with a given class 
 #|   level within a given drive type level.
 
-ggplot(mpg, aes(x = drv, fill = class)) + 
+ggplot(mpg, aes(x = drv, fill = class)) +
   geom_bar()
 ```
 
@@ -919,13 +923,13 @@ If you don't want a stacked bar chart, you can use one of three other options: `
     #|   the first plot the bars are filled with transparent colors
     #|   and in the second plot they are only outlined with color.
 
-    # Top
-    ggplot(mpg, aes(x = drv, fill = class)) + 
-      geom_bar(alpha = 1/5, position = "identity") 
+# Top
+ggplot(mpg, aes(x = drv, fill = class)) +
+  geom_bar(alpha = 1 / 5, position = "identity")
 
-    # Bottom
-    ggplot(mpg, aes(x = drv, color = class)) + 
-      geom_bar(fill = NA, position = "identity")
+# Bottom
+ggplot(mpg, aes(x = drv, color = class)) +
+  geom_bar(fill = NA, position = "identity")
 ```
 
     The identity position adjustment is more useful for 2d geoms, like points, where it is the default.
@@ -951,13 +955,13 @@ If you don't want a stacked bar chart, you can use one of three other options: `
     #|   group. Heights of these bars represent the number of cars with a given 
     #|   level of drive type and class.
 
-    # Left
-    ggplot(mpg, aes(x = drv, fill = class)) + 
-      geom_bar(position = "fill")
+# Left
+ggplot(mpg, aes(x = drv, fill = class)) +
+  geom_bar(position = "fill")
 
-    # Right
-    ggplot(mpg, aes(x = drv, fill = class)) + 
-      geom_bar(position = "dodge")
+# Right
+ggplot(mpg, aes(x = drv, fill = class)) +
+  geom_bar(position = "dodge")
 ```
 
 There's one other type of adjustment that's not useful for bar charts, but can be very useful for scatterplots.
@@ -997,14 +1001,13 @@ Because this is such a useful operation, ggplot2 comes with a shorthand for `geo
 
 To learn more about a position adjustment, look up the help page associated with each adjustment: `?position_dodge`, `?position_fill`, `?position_identity`, `?position_jitter`, and `?position_stack`.
 
-## 2.6.1 Exercises {.unnumbered}
+### 2.6.1 Exercises {.unnumbered}
 
 1.  What is the problem with the following plot? How could you improve it?
 
 ```{r}
 
-    ggplot(mpg, aes(x = cty, y = hwy)) + 
-      geom_point()
+ggplot(mpg, aes(x = cty, y = hwy)) + geom_point()
 ```
 
 Ans: 2.6.1.1:
@@ -1013,10 +1016,9 @@ Ans: 2.6.1.1:
 
 
 ```{r}
-    ggplot(mpg, aes(x = displ, y = hwy)) +
-      geom_point() + 
-    ggplot(mpg, aes(x = displ, y = hwy)) +
-      geom_point(position = "identity")         
+(ggplot(mpg, aes(x = displ, y = hwy)) +
+  geom_point()) + (ggplot(mpg, aes(x = displ, y = hwy)) +
+  geom_point(position = "identity"))        
 ```
 
 Ans: 2.6.1.2:
@@ -1039,15 +1041,17 @@ Ans: 2.6.1.3:
 
 #` geom_count()` sizes the points based on the number of observations at a given location.
 
-    g + geom_jitter()
-    g + geom_count()
+g + geom_jitter()
+g + geom_count()
 ```
 
 
 5.  What's the default position adjustment for `geom_boxplot()`? Create a visualization of the `mpg` dataset that demonstrates it by adding the default position using the following ggplot:
 
 ```{r}
-g <- ggplot(data = mpg, mapping = aes(x = manufacturer, y = hwy, color = manufacturer)) 
+g <-
+  ggplot(data = mpg,
+         mapping = aes(x = manufacturer, y = hwy, color = manufacturer)) 
 ```
 
 
@@ -1056,8 +1060,8 @@ g <- ggplot(data = mpg, mapping = aes(x = manufacturer, y = hwy, color = manufac
 #| fig.show: "hold"
 
 # The default is position for `geom_boxplot()` is `"dodge2"`.
-   g + geom_boxplot()
-   g + geom_boxplot(position = "dodge2")
+g + geom_boxplot()
+g + geom_boxplot(position = "dodge2")
 ```
 
 
