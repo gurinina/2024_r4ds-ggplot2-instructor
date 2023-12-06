@@ -1,5 +1,5 @@
 # Layers 
-https://r-graphics.org/recipe-bar-graph-labels
+
 ```{r}
 # set global options
 source("_common.R")
@@ -60,7 +60,7 @@ Among the variables in `mpg` are:
 3.  `class`: Type of car.
     A categorical variable.
 
-Let's start by visualizing the relationship between `displ` and `hwy` for various `class`es of cars.
+Let's start by visualizing the relationship between `displ` and `hwy` for various `classes` of cars.
 We can do this with a scatterplot where the numerical variables are mapped to the `x` and `y` aesthetics and the categorical variable is mapped to an aesthetic like `color` or `shape`.
 
 ```{r}
@@ -155,12 +155,12 @@ You'll need to pick a value that makes sense for that aesthetic:
 
 -   The name of a color as a character string, e.g., `color = "blue"`
 -   The size of a point in mm, e.g., `size = 1`
--   The shape of a point as a number, e.g, `shape = 1`, as shown in @fig-shapes.
+-   The shape of a point as a number, e.g, `shape = 1`, as shown in \@ref(fig:fig-shapes).
 
 ```{r}
 #| label: fig-shapes
 #| echo: false
-#| warning: false
+#| 
 #| fig.asp: 0.364
 #| fig-align: "center"
 #| fig-cap: |
@@ -729,10 +729,10 @@ Other graphs, like bar charts, calculate new values to plot:
 -   Boxplots compute the five-number summary of the distribution and then display that summary as a specially formatted box.
 
 The algorithm used to calculate new values for a graph is called a **stat**, short for statistical transformation.
-@fig-vis-stat-bar shows how this process works with `geom_bar()`.
+\@ref(fig:fig-vis-stat-bar) shows how this process works with `geom_bar()`.
 
 ```{r}
-#| label: fig-vis-stat
+#| label: fig-vis-stat-bar
 #| echo: false
 #| out-width: "100%"
 #| fig-cap: |
@@ -761,7 +761,7 @@ However, there are three reasons why you might need to use a stat explicitly:
 1.  You might want to override the default stat. In the code below, we change the stat of `geom_bar()` from count (the default) to identity.This lets us map the height of the bars to the raw values of a y variable.
 
 ```{r}
-    #| warning: false
+    #| 
     #| fig-alt: |
     #|   Bar chart of number of each cut of diamond. There are roughly 1500 
     #|   Fair, 5000 Good, 12000 Very Good, 14000 Premium, and 22000 Ideal cut 
@@ -777,6 +777,7 @@ However, there are three reasons why you might need to use a stat explicitly:
     For example, you might want to display a bar chart of proportions, rather than counts:
 
 ```{r}
+    #| 
     #| fig-alt: |
     #|   Bar chart of proportion of each cut of diamond. Roughly, Fair 
     #|   diamonds make up 0.03, Good 0.09, Very Good 0.22, Premium 0.26, and 
@@ -1062,7 +1063,7 @@ g <- ggplot(data = mpg, mapping = aes(x = manufacturer, y = hwy, color = manufac
 
 ## Grammar of graphics 
 
-We can expand on the graphing template you learned in @sec-ggplot2-calls by adding position adjustments, stats, coordinate systems, and faceting:
+We can expand on the graphing template you've learned by adding position adjustments, stats, coordinate systems, and faceting:
 
 ```         
 ggplot(data = <DATA>) + 
@@ -1085,11 +1086,11 @@ To see how this works, consider how you could build a basic plot from scratch: y
 Next, you could choose a geometric object to represent each observation in the transformed data.
 You could then use the aesthetic properties of the geoms to represent variables in the data.
 You would map the values of each variable to the levels of an aesthetic.
-These steps are illustrated in @fig-visualization-grammar.
+These steps are illustrated in \@ref(fig:visualization-grammar).
 You'd then select a coordinate system to place the geoms into, using the location of the objects (which is itself an aesthetic property) to display the values of the x and y variables.
 
 ```{r}
-#| label: fig-visualization-gramm
+#| label: visualization-grammar
 #| echo: false
 #| fig-alt: |
 #|   A figure demonstrating the steps for going from raw data to table of 
@@ -1114,7 +1115,6 @@ If you'd like to learn more about the theoretical underpinnings of ggplot2, you 
 ## Summary 
 
 In this chapter you learned about the layered grammar of graphics starting with aesthetics and geometries to build a simple plot, facets for splitting the plot into subsets, statistics for understanding how geoms are calculated, position adjustments for controlling the fine details of position when geoms might otherwise overlap, and coordinate systems which allow you to fundamentally change what `x` and `y` mean.
-One layer we have not yet touched on is theme, which we will introduce in @sec-themes.
 
 Two very useful resources for getting an overview of the complete ggplot2 functionality are the ggplot2 cheatsheet (which you can find at <https://posit.co/resources/cheatsheets>) and the ggplot2 package website ([https://ggplot2.tidyverse.org](https://ggplot2.tidyverse.org/)).
 

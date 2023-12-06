@@ -34,7 +34,7 @@ Uncomment the following line if you need to install any of these packages (you s
 
 ```{r}
 #| label: setup
-#| message: false
+
 
 library(tidyverse)
 library(scales)
@@ -49,7 +49,7 @@ The easiest place to start when turning an exploratory graphic into an expositor
 You add labels with the `labs()` function.
 
 ```{r}
-#| message: false
+
 #| fig-alt: |
 #|   Scatterplot of highway fuel efficiency versus engine size of cars, where 
 #|   points are colored according to the car class. A smooth curve following 
@@ -502,7 +502,7 @@ We'll come back to themes at the end of the chapter, but in brief, they control 
 The theme setting `legend.position` controls where the legend is drawn:
 
 ```{r}
-#| fig-width: 4
+#| fig-width: 8
 #| fig-alt: |
 #|   Four scatterplots of highway fuel efficiency versus engine size of cars 
 #|   where points are colored based on class of car. Clockwise, the legend 
@@ -557,7 +557,7 @@ It's very useful to plot transformations of your variable.
 For example, it's easier to see the precise relationship between `carat` and `price` if we log transform them:
 
 ```{r}
-#| fig-width: 3
+#| fig-width: 8
 #| fig-alt: |
 #|   Two plots of price versus carat of diamonds. Data binned and the color of 
 #|   the rectangles representing each bin based on the number of points that 
@@ -594,17 +594,17 @@ The two plots below look similar, but there is enough difference in the shades o
 [^communication-1]: You can use a tool like [SimDaltonism](https://michelf.ca/projects/sim-daltonism/) to simulate color blindness to test these images.
 
 ```{r}
-#| fig-width: 3
+#| fig-width: 8
 #| fig-alt: |
 #|   Two scatterplots of highway mileage versus engine size where points are 
 #|   colored by drive type. The plot on the left uses the default 
 #|   ggplot2 color palette and the plot on the right uses a different color 
 #|   palette.
 
-ggplot(mpg, aes(x = displ, y = hwy)) +
-  geom_point(aes(color = drv)) + ggplot(mpg, aes(x = displ, y = hwy)) +
+(ggplot(mpg, aes(x = displ, y = hwy)) +
+  geom_point(aes(color = drv))) / (ggplot(mpg, aes(x = displ, y = hwy)) +
   geom_point(aes(color = drv)) +
-  scale_color_brewer(palette = "Set1")
+  scale_color_brewer(palette = "Set1"))
 ```
 
 Don't forget simpler techniques for improving accessibility.
@@ -623,7 +623,7 @@ ggplot(mpg, aes(x = displ, y = hwy)) +
 ```
 
 The ColorBrewer scales are documented online at <https://colorbrewer2.org/> and made available in R via the **RColorBrewer** package, by Erich Neuwirth.
-@fig-brewer shows the complete list of all palettes.
+\@ref(fig:fig-brewer) shows the complete list of all palettes.
 The sequential (top) and diverging (bottom) palettes are particularly useful if your categorical values are ordered, or have a "middle".
 This often arises if you've used `cut()` to make a continuous variable into a categorical variable.
 
@@ -711,7 +711,7 @@ Subsetting the data has affected the x and y scales as well as the smooth curve.
 ```{r}
 
 #| fig-width: 4
-#| message: false
+
 #| fig-alt: |
 #|   On the left, scatterplot of highway mileage vs. displacement, with 
 #|   displacement. The smooth curve overlaid shows a decreasing, and then 
@@ -735,8 +735,8 @@ We can see that reducing the limits is equivalent to subsetting the data.
 Therefore, to zoom in on a region of the plot, it's generally best to use `coord_cartesian()`.
 
 ```{r}
-#| fig-width: 4
-#| message: false
+#| fig-width: 8
+
 #| warning: false
 #| fig-alt: |
 #|   On the left, scatterplot of highway mileage vs. displacement, with 
@@ -760,7 +760,7 @@ On the other hand, setting the `limits` on individual scales is generally more u
 For example, if we extract two classes of cars and plot them separately, it's difficult to compare the plots because all three scales (the x-axis, the y-axis, and the color aesthetic) have different ranges.
 
 ```{r}
-#| fig-width: 4
+#| fig-width: 8
 #| fig-alt: |
 #|   On the left, a scatterplot of highway mileage vs. displacement of SUVs.
 #|   On the right, a scatterplot of the same variables for compact cars.
@@ -784,7 +784,7 @@ One way to overcome this problem is to share scales across multiple plots, train
 
 ```{r}
 
-#| fig-width: 4
+#| fig-width: 8
 #| fig-alt: |
 #|   On the left, a scatterplot of highway mileage vs. displacement of SUVs.
 #|   On the right, a scatterplot of the same variables for compact cars.
@@ -864,7 +864,7 @@ Ans: 1.4.1.3
 Finally, you can customize the non-data elements of your plot with a theme:
 
 ```{r}
-#| message: false
+
 #| fig-alt: |
 #|   Scatterplot of highway mileage vs. displacement of cars, colored by class 
 #|   of car. The plot background is white, with gray grid lines.
@@ -875,7 +875,7 @@ ggplot(mpg, aes(x = displ, y = hwy)) +
   theme_bw()
 ```
 
-ggplot2 includes the eight themes shown in @fig-themes, with `theme_gray()` as the default.[^communication-2]
+ggplot2 includes the eight themes shown in \@ref(fig:fig-themes), with `theme_gray()` as the default.[^communication-2]
 Many more are included in add-on packages like **ggthemes** (<https://jrnold.github.io/ggthemes>), by Jeffrey Arnold.
 You can also create your own themes, if you are trying to match a particular corporate or journal style.
 

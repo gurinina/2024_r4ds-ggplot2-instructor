@@ -1,7 +1,7 @@
 
 
 knitr::opts_chunk$set(
-  fig.width = 6,
+  fig.width = 8,
   fig.asp = 2/3,
   message = FALSE,
   warning = FALSE,
