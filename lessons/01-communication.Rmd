@@ -814,7 +814,7 @@ ggplot(suv, aes(x = displ, y = hwy, color = drv)) +
 
 In this particular case, you could have simply used faceting, but this technique is useful more generally, if for instance, you want to spread plots over multiple pages of a report.
 
-### Exercises 1.4.1 {.unnumbered}
+### Exercises 1.4.6 {.unnumbered}
 
 1.  Why doesn't the following code override the default scale?
 
@@ -997,11 +997,8 @@ p2 <- ggplot(mpg, aes(x = drv, y = hwy)) +
 p1 + p2
 ```
 
-It's important to note that in the above code chunk we did not use a new function from the patchwork package.
-Instead, the package added a new functionality to the `+` operator.
 
-You can also create complex plot layouts with patchwork.
-In the following, `|` places the `p1` and `p3` next to each other and `/` moves `p2` to the next line.
+You can also create complex plot layouts using `|` and `/`. In the following, `|` places the `p1` and `p3` next to each other and `/` moves `p2` to the next line.
 
 ```{r}
 #| fig-width: 6
