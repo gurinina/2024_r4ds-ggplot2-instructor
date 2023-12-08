@@ -4,11 +4,12 @@ knitr::opts_chunk$set(
   fig.width = 8,
   # fig.height = 6,
   fig.asp = 0.7,
+  fig.align = "center",
   message = FALSE,
   warning = FALSE,
   tidy = TRUE,
   tidy.opts = list(arrow=TRUE,width.cutoff = 80),
-  fig.show = 'hold',
+  # fig.show = 'hold',
   collapse = TRUE
 )
 

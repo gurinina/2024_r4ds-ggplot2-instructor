@@ -1,6 +1,7 @@
 # Layers 
 
 ```{r set global options}
+# set global options
 source("_common.R")
 ```
 
@@ -85,7 +86,7 @@ Use '/' to plot them in one column:
 (ggplot(mpg, aes(x = displ, y = hwy, color = class)) + geom_point() )/ (ggplot(mpg, aes(x = displ, y = hwy, shape = class)) + geom_point())
 ```
 
-Notice that parentheses are required for this operation unless you first save the plots:
+**Notice that parentheses are required for this operation unless you first save the plots:**
 
 ```{r}
 p1 <- ggplot(mpg, aes(x = displ, y = hwy, color = class)) + geom_point()
@@ -205,15 +206,16 @@ In the next section we dive deeper into geoms.
 
 1.  Create a scatterplot of `hwy` vs. `displ` where the points are pink filled in triangles.
 
-
-```{r Ans:2.2.1.1}
+**Ans-2.2.1.1:**
+```{r Ans-2.2.1.1}
 ```
 
 
 2.  Why did the following code not result in a plot with blue points?
 
 ```{r}
-#| 
+#| fig-show: hide
+
 #| fig-alt: |
 #|   Scatterplot of highway fuel efficiency versus engine size of cars  
 #|   that shows a negative association. All points are red and 
@@ -223,25 +225,26 @@ ggplot(mpg) +
   geom_point(aes(x = displ, y = hwy, color = "blue"))
 ```
 
-
-```{r Ans: 2.2.1.2}
+**Ans-2.2.1.2:**
+```{r Ans-2.2.1.2}
 
 ```
-
 
 
 3.  What does the `stroke` aesthetic do? What shapes does it work with? (Hint: use `?geom_point`)
 
-Ans: 2.2.1.3:
+**Ans-2.2.1.3:**
 
 4.  What happens if you map an aesthetic to something other than a variable name, like `aes(color = displ < 5)`? Try it by adding color to the following plot. 
 
 ```{r}
+#| fig-show: hide
+
 ggplot(mpg) + geom_point(aes(x = displ, y = hwy))
 ```
 
-
-```{r Ans: 2.2.1.4}
+**Ans-2.2.1.4:**
+```{r Ans-2.2.1.4}
 
 ```
 
@@ -251,7 +254,6 @@ How are these two plots similar?
 
 ```{r}
 #| echo: false
-#
 #| fig-show: hide
 #| fig-alt: |
 #|   There are two plots. The plot on the left is a scatterplot of highway 
@@ -413,14 +415,14 @@ To learn more about any single geom, use the help (e.g., `?geom_smooth`).
 
 ### 2.3.1 Exercises {.unnumbered}
 
-1.  What geom would you use to draw a line chart? A boxplot? A histogram? An area chart?
+1.a. What geom would you use to draw a line chart? A boxplot? A histogram? An area chart?
 
-Ans: 2.3.1.1a:
+**Ans-2.3.1.1a:**
 
-Use the following ggplot to create 4 plots, `geom_line()`, `geom_boxplot()`, `geom_point()` and `geom_area()`. Include a title specifying the geometry for each.
+  b. Use the following ggplot to create 4 plots, `geom_line()`, `geom_boxplot()`, `geom_point()` and `geom_area()`. Include a title specifying the geometry for each.
 
+```{r}
 
-```{r Ans: 2.3.1.1}
 df <- data.frame(
   x = c(3, 1, 5), 
   y = c(2, 4, 6), 
@@ -431,8 +433,8 @@ p <- ggplot(df, aes(x, y, label = label))
   
 ```
 
-
-```{r Ans: 2.3.1.1b}
+**Ans-2.3.1.1b:**
+```{r Ans-2.3.1.1b}
 
 ```
 
@@ -440,7 +442,6 @@ p <- ggplot(df, aes(x, y, label = label))
 2.  Earlier in this chapter we used `show.legend` without explaining it:
 
 ```{r}
-
 #| fig-show: hide
 
 ggplot(mpg, aes(x = displ, y = hwy)) +
@@ -452,8 +453,8 @@ What does `show.legend = FALSE` do here?
 What happens if you remove it?
 Try it.
 
-
-```{r Ans: 2.3.1.2}
+**Ans-2.3.1.2:**
+```{r Ans-2.3.1.2}
 
 ```
 
@@ -461,13 +462,13 @@ Try it.
 
 3.  What does the `se` argument to `geom_smooth()` do?
 
-Ans: 2.3.1.3:
+**Ans-2.3.1.3:**
 
 
-4.  Recreate the R code necessary to generate and save the following graph (\@ref(fig:fig-6-plots)), and arrange them in a figure with 2 columns. Note that wherever a categorical variable is used in the plot, it's `drv`. Use the mathematical notation in one, and the function from `patchwork`, `plot_layout` in another for laying out the plot.
+4.  Recreate the R code necessary to generate and save the following graph \@ref(fig:fig-6-plots) \ref{fig:fig-6-plots}, and arrange them in a figure with 2 columns. Note that wherever a categorical variable is used in the plot, it's `drv`. Use the mathematical notation in one, and the function from `patchwork`, `plot_layout` in another for laying out the plot.
 
 ```{r fig-6-plots}
-#| label: fig-6-plots
+#| label:fig-6-plots
 #| echo: false
 #| out-width: "100%"
 #| fig-alt: |
@@ -490,8 +491,8 @@ Ans: 2.3.1.3:
 knitr::include_graphics("images/6-plots.png")
 ```
 
-
-```{r, Ans: 2.3.1.4}
+**Ans-2.3.1.4:**
+```{r, Ans-2.3.1.4}
 
 ```
 
@@ -584,10 +585,13 @@ ggplot(mpg, aes(x = displ, y = hwy)) +
 1.  What happens if you facet on a continuous variable? Try it on the. plot below and facet on `hwy`.
 
 ```{r}
+#| fig-show: hide
+
 ggplot(mpg, aes(x = drv, y = cyl)) + geom_point() 
 ```
 
-```{r Ans: 2.4.1.1}
+**Ans-2.4.1.1:**
+```{r Ans-2.4.1.1}
 
 ```
 
@@ -595,12 +599,13 @@ ggplot(mpg, aes(x = drv, y = cyl)) + geom_point()
 2.  Run the following code and facet on drv vs cyl. What do the empty cells mean?
 
 ```{r}
+#| fig-show: hide
 
 ggplot(mpg) + geom_point(aes(x = drv, y = cyl))
 ```
 
-
-```{r Ans: 2.4.1.2}
+**Ans-2.4.1.2:**
+```{r Ans-2.4.1.2}
 
 ```
 
@@ -609,7 +614,6 @@ ggplot(mpg) + geom_point(aes(x = drv, y = cyl))
 
 ```{r}
 #| fig-show: hide
-
 
 ggplot(mpg) +
   geom_point(aes(x = displ, y = hwy)) +
@@ -621,7 +625,7 @@ ggplot(mpg) +
 ```
 
 
-Ans: 2.4.1.3:
+**Ans-2.4.1.3:**
 
 4.  Take the first faceted plot in this section:
 
@@ -633,33 +637,32 @@ ggplot(mpg) +
 ```
 
       
-What are the advantages to using faceting instead of the color aesthetic?
+  a. What are the advantages to using faceting instead of the color aesthetic? What are the disadvantages?
 
-What are the disadvantages?
+**Ans-2.4.1.4a:**
 
-Ans: 2.4.1.4a:
-
-What if you were interested in a specific class, e.g. compact cars? How would highlight that group only using an additional layer added to the plot below?
+  b. What if you were interested in a specific class, e.g. compact cars? How would highlight that group using only an additional layer added to the plot below?
 
 ```{r}
+#| fig-show: hide
+
 ggplot(mpg, aes(x = displ, y = hwy)) +
   geom_point(color = "gray") 
 ```
 
-
-```{r Ans: 2.4.1.4b}
+**Ans-2.4.1.4b:**
+```{r Ans-2.4.1.4b}
 
 ```
 
 
 5.  Read `?facet_wrap`. What does `nrow` do? What does `ncol` do? What other options control the layout of the individual panels? Why doesn't `facet_grid()` have `nrow` and `ncol` arguments?
 
-Ans: 2.4.1.5:
+**Ans-2.4.1.5:**
 
 6.  Which of the following plots makes it easier to compare engine size (`displ`) across cars with different drive trains? What does this say about when to place a faceting variable across rows or columns?
 
 ```{r}
-
 #| fig-show: hide
 
 ggplot(mpg, aes(x = displ)) +
@@ -673,7 +676,7 @@ ggplot(mpg, aes(x = displ)) +
 ```
 
 
-Ans: 2.4.1.6:
+**Ans-2.4.1.6:**
 
 7.  Recreate the following plot using `facet_wrap()` instead of `facet_grid()`. How do the positions of the facet labels change?
 
@@ -684,9 +687,25 @@ ggplot(mpg) +
   facet_grid(drv ~ .)
 ```
 
+**Ans-2.4.1.7:**
+```{r, Ans-2.4.1.7}
 
-```{r, Ans:2.4.1.7}
 
+```
+
+
+8. Modify the facet label in the following plot so that it has a background color of `navy` with a `red` outline and `white` text. 
+
+```{r}
+#| fig-show: hide
+
+ggplot(mpg) +
+  geom_point(aes(x = displ, y = hwy)) +
+  facet_grid(drv ~ .)
+```
+
+**Ans-2.4.1.8:**
+```{r Ans-2.4.1.8}
 
 ```
 
@@ -806,55 +825,65 @@ Each stat is a function, so you can get help in the usual way, e.g., `?stat_bin`
 
 1.  What is the default geom associated with `stat_summary()`? How could you rewrite the previous plot to use that geom function instead of the stat function?
 
-
-```{r Ans: 2.5.1.1}
+**Ans-2.5.1.1:**
+```{r Ans-2.5.1.1}
 
 
 ```
 
+2.a. What does `geom_col()` do? How is it different from `geom_bar()`?
 
+**Ans-2.5.1.2a:**
 
-2.  What does `geom_col()` do? How is it different from `geom_bar()`?
-
-Ans: 2.5.1.2a:
-
-Use the ggplot below and compare adding a `geom_bar` layer to a `geom_col` to count the classes in drv.
+  b. Plot mpg and count the classes in drv. Compare `geom_bar` to `geom_col`.
 
 ```{r}
+#| fig-show: hide
 
 g <- ggplot(mpg, aes(class))
 ```
 
-
-```{r Ans: 2.5.1.2b}
+**Ans-2.5.1.2b:**
+```{r Ans-2.5.1.2b}
 
 ```
 
 
 3.  Most geoms and stats come in pairs that are almost always used in concert. Make a list of all the pairs. What do they have in common? (Hint: Read through the documentation.). Write the stat used for `geom_bar()`,`geom_smooth()` and `geom_boxplot()`.
 
-Ans: 2.5.1.3:
+**Ans-2.5.1.3:**
 
 4.  What variables does `stat_smooth()` compute? What arguments control its behavior?
 
-2.5.1.4:
+**Ans-2.5.1.4:**
 
 
-5.  In our proportion bar chart, we needed to set `group = 1`. Why? In other words, what is the problem with these two graphs?
-Replot the two plots below using `group = 1`.
+5.a. In our proportion bar chart, we needed to set `group = 1`. Why? In other words, what is the problem with these two graphs? Replot the two plots below using `group = 1`.
+    
 
 ```{r}
+#| fig-show: hide
+
+ggplot(diamonds, aes(x = cut, y = after_stat(prop))) +
+  geom_bar()
+
+ggplot(diamonds, aes(x = cut, fill = color, y = after_stat(prop))) + geom_bar()
 
 
- ggplot(diamonds, aes(x = cut, y = after_stat(prop))) + 
-      geom_bar()
-    
- ggplot(diamonds, aes(x = cut, fill = color, y = after_stat(prop))) + 
-      geom_bar()
 ```
 
 
-```{r Ans: 2.5.1.5}
+**Ans-2.5.1.5a:**
+
+```{r Ans-2.5.1.5a}
+
+```
+
+
+  b. Replot the above two plots below without using `group = 1` and use 'after_stat(count)' to calculate proportions instead of `after_stat(prop)'. Label the y-axis using percentages. Hint: check out the scales package that we loaded.
+
+**Ans-2.5.1.5b:**
+```{r Ans-2.5.1.5b}
 
 ```
 
@@ -920,7 +949,7 @@ ggplot(mpg, aes(x = drv, color = class)) +
   geom_bar(fill = NA, position = "identity")
 ```
 
-    The identity position adjustment is more useful for 2d geoms, like points, where it is the default.
+The identity position adjustment is more useful for 2d geoms, like points, where it is the default.
 
 -   `position = "fill"` works like stacking, but makes each set of stacked bars the same height.
     This makes it easier to compare proportions across groups.
@@ -994,19 +1023,17 @@ To learn more about a position adjustment, look up the help page associated with
 1.  What is the problem with the following plot? How could you improve it?
 
 ```{r}
-
 #| fig-show: hide
 
 ggplot(mpg, aes(x = cty, y = hwy)) + geom_point()
 ```
 
-Ans: 2.6.1.1:
+**Ans-2.6.1.1:**
 
 2.  What, if anything, is the difference between these two plots? Why?
 
 
 ```{r}
-
 #| fig-show: hide
 
 ggplot(mpg, aes(x = displ, y = hwy)) +
@@ -1016,49 +1043,41 @@ ggplot(mpg, aes(x = displ, y = hwy)) +
   geom_point(position = "identity")      
 ```
 
-Ans: 2.6.1.2:
+**Ans-2.6.1.2:**
 
 3.  What parameters to `geom_jitter()` control the amount of jittering?
 
-Ans: 2.6.1.3:
+**Ans-2.6.1.3:**
 
 4.  Compare and contrast `geom_jitter()` with `geom_count()` using the following ggplot.
 
 ```{r}
- g <- ggplot(mpg, aes(x = displ, y = hwy))
+#| fig-show: hide
+ 
+g <- ggplot(mpg, aes(x = displ, y = hwy))
+
 ```
 
-```{r Ans: 2.6.1.4}
-#| out-width: "50%"
-#| fig.show: "hold"
+**Ans-2.6.1.4:**
+```{r Ans-2.6.1.4}
 
-# `geom_jitter()` adds random noise to the location of the points to avoid overplotting.
-
-#` geom_count()` sizes the points based on the number of observations at a given location.
-
-g + geom_jitter()
-g + geom_count()
 ```
 
 
 5.  What's the default position adjustment for `geom_boxplot()`? Create a visualization of the `mpg` dataset that demonstrates it by adding the default position using the following ggplot:
 
 ```{r}
-g <-
-  ggplot(data = mpg,
-         mapping = aes(x = manufacturer, y = hwy, color = manufacturer)) 
+#| fig-show: hide
+
+g <- ggplot(data = mpg,
+       mapping = aes(x = manufacturer, y = hwy, color = manufacturer)) 
+
 ```
 
+**Ans-2.6.1.5:**
+```{r Ans-2.6.1.5}
 
-```{r Ans: 2.6.1.5}
-#| out-width: "50%"
-#| fig.show: "hold"
-
-# The default is position for `geom_boxplot()` is `"dodge2"`.
-g + geom_boxplot()
-g + geom_boxplot(position = "dodge2")
 ```
-
 
 ## Grammar of graphics 
 

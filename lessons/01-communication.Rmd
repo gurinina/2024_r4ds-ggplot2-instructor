@@ -22,7 +22,7 @@ It doesn't teach the mechanics of creating visualizations, but instead focuses o
 ### Prerequisites
 
 In this chapter, we'll focus once again on ggplot2.
-We'll also use a little dplyr for data manipulation, **scales** to override the default breaks, labels, transformations and palettes, and a few ggplot2 extension packages, including **ggrepel** ([https://ggrepel.slowkow.com](https://ggrepel.slowkow.com/)) by Kamil Slowikowski and **patchwork** ([https://patchwork.data-imaginist.com](https://patchwork.data-imaginist.com/)) by Thomas Lin Pedersen.
+We'll also use a little **dplyr** for data manipulation, **scales** to override the default breaks, labels, transformations and palettes, and a few ggplot2 extension packages, including **ggrepel** ([https://ggrepel.slowkow.com](https://ggrepel.slowkow.com/)) by Kamil Slowikowski and **patchwork** ([https://patchwork.data-imaginist.com](https://patchwork.data-imaginist.com/)) by Thomas Lin Pedersen.
 Don't forget that you'll need to install those packages with `install.packages()` if you don't already have them.
 
 Uncomment the following line if you need to install any of these packages (you should have `tidyverse`:
@@ -105,8 +105,8 @@ ggplot(df, aes(x, y)) +
 
 1.  Create a boxplot using the fuel economy data with x = `hwy` and y = `class` customized `title`, `subtitle`, `caption`, `x`, `y`, and `color` labels.
 
-Ans 1.3.1.1:
-```{r Ans 1.3.1.1}
+Ans-1.2.1.1:
+```{r Ans-1.2.1.1}
 # enter your answer here
 ```
 
@@ -122,8 +122,8 @@ Ans 1.3.1.1:
 knitr::include_graphics("images/fueleconomy.png")
 ```
 
-Ans 1.3.1.2:
-```{r Ans 1.3.1.2}
+Ans-1.2.1.2:
+```{r Ans-1.2.1.2}
   
 ```
 
@@ -141,8 +141,8 @@ In the following plot we pull out the cars with the highest engine size in each 
 
 ```{r}
 
-# case_when where the left hand side determines which values match this case and the right hand side provides the replacement value.
 # slice_head operates by group, so when n = 1 it means the size of the group
+# case_when where the left hand side determines which values match this case and the right hand side provides the replacement value.
 
 label_info <- mpg |>
   group_by(drv) |>
@@ -159,6 +159,7 @@ label_info <- mpg |>
 
 label_info
 ```
+**Notice that `displ` values in `label_info` have captured the right-most point for each drive type.**
 
 Then, we use this new data frame to directly label the three groups to replace the legend with labels placed directly on the plot.
 Using the `fontface` and `size` arguments we can customize the look of the text labels.
@@ -177,10 +178,11 @@ ggplot(mpg, aes(x = displ, y = hwy, color = drv)) +
   geom_text(
     data = label_info, 
     aes(x = displ, y = hwy, label = drive_type),
-    fontface = "bold", size = 5, hjust = "right", vjust = "bottom"
+    fontface = "bold", size = 5, hjust = "right", vjust = "top"
   ) +
   theme(legend.position = "none")
 ```
+**Once you see the placement you can use `nudge_x` and `nudge_y` to set it so that it doesn't overlap.**
 
 Note the use of `hjust` (horizontal justification) and `vjust` (vertical justification) to control the alignment of the label.
 
@@ -242,8 +244,7 @@ A couple ideas:
 
 -   Use `geom_rect()` to draw a rectangle around points of interest.
     The boundaries of the rectangle are defined by aesthetics `xmin`, `xmax`, `ymin`, `ymax`.
-    Alternatively, look into the [ggforce package](https://ggforce.data-imaginist.com/index.html), specifically [`geom_mark_hull()`](https://ggforce.data-imaginist.com/reference/geom_mark_hull.html), which allows you to annotate subsets of points with hulls.
-
+    
 -   Use `geom_segment()` with the `arrow` argument to draw attention to a point with an arrow.
     Use aesthetics `x` and `y` to define the starting location, and `xend` and `yend` to define the end location.
 
@@ -291,20 +292,24 @@ The only limit is your imagination (and your patience with positioning annotatio
 
 ### Exercises 1.3.1 {.unnumbered}
 
-1.  Use `geom_text()` with infinite positions to place text at the four corners of the plot.
+1.  Use `geom_text()` with infinite positions to place text at the four corners of the plot. **Hint: construct a `data.frame` similar to `label_info` with the coordinate positions.**
 
-Ans: 1.3.1.1:
-```{r Ans: 1.3.1.1}
+Ans-1.3.1.1:
+```{r Ans-1.3.1.1}
 
 ```
 
 
-2.  Use `annotate()` to add a point geom in the middle of your last plot without having to create a tibble.
-    Customize the shape, size, or color of the point.
+2.  Use `annotate()` to add a point geom in the middle of the following plot without having to create a tibble. Customize the shape, size, or color of the point.
+
+```{r}
+ggplot(mpg, aes(displ, hwy)) +
+  geom_point() 
+```
     
 
-Ans: 1.3.1.2:
-```{r Ans: 1.3.1.2}
+Ans-1.3.1.2:
+```{r Ans-1.3.1.2}
 
 ```
 
@@ -315,38 +320,38 @@ Ans: 1.3.1.2:
 g <- ggplot(mpg, aes(displ, hwy)) + geom_point()
 ```
 
+
+Ans-1.3.1.3a:
+```{r Ans-1.3.1.3a}
+
+```
+
+
     b. How can you add a label to a single facet?
+    
+Ans-1.3.1.3b:
+```{r Ans-1.3.1.3b}
+
+
+```
+
     c. How can you put a different label in each facet?
     (Hint: Think about the dataset that is being passed to `geom_text()`.)
-
-
-Ans: 1.3.1.3a:
-```{r Ans: 1.3.1.3a}
-
-```
-
-Ans: 1.3.1.3b
-```{r Ans: 1.3.1.3b}
-
+    
+Ans-1.3.1.3c:
+```{r Ans-1.3.1.3c}
 
 ```
-
-
-Ans: 1.3.1.3c
-```{r Ans: 1.3.1.3c}
-
-```
-
 
 4.  What arguments to `geom_label()` control the appearance of the background box?
 
-Ans: 1.3.1.4
+Ans-1.3.1.4:
 
 5.  What are the four arguments to `arrow()`?
     How do they work?
     Create a series of plots that demonstrate the most important options.
 
-Ans: 1.3.1.5
+Ans-1.3.1.5:
 
 ## Scales
 
@@ -431,8 +436,8 @@ ggplot(mpg, aes(x = displ, y = hwy, color = drv)) +
   scale_color_discrete(labels = c("4" = "4-wheel", "f" = "front", "r" = "rear"))
 ```
 
-The `labels` argument coupled with labelling functions from the scales package is also useful for formatting numbers as currency, percent, etc.
-The plot on the left shows default labelling with `label_dollar()`, which adds a dollar sign as well as a thousand separator comma.
+The `labels` argument coupled with labeling functions from the scales package is also useful for formatting numbers as currency, percent, etc.
+The plot on the left shows default labeling with `label_dollar()` from the `scales` package, which adds a dollar sign as well as a thousand separator comma.
 The plot on the right adds further customization by dividing dollar values by 1,000 and adding a suffix "K" (for "thousands") as well as adding custom breaks.
 Note that `breaks` is in the original scale of the data.
 
@@ -481,7 +486,7 @@ For example, take this plot that shows when each US president started and ended 
 #|   formatted as two digit years starting with an apostrophe, e.g., '53.
 
 presidential |>
-  mutate(id = 33 + row_number()) |>
+  mutate(id = 33 + row_number()) |> # the ordinal number of the president, e.g. Trump is in the 12th row + 33 = 45th president
   ggplot(aes(x = start, y = id)) +
   geom_point() +
   geom_segment(aes(xend = end, yend = id)) +
@@ -569,7 +574,7 @@ For example, it's easier to see the precise relationship between `carat` and `pr
 
 # Left-# Right
 ggplot(diamonds, aes(x = carat, y = price)) +
-  geom_bin2d() + ggplot(diamonds, aes(x = log10(carat), y = log10(price))) + geom_bin2d()
+  geom_hex() + ggplot(diamonds, aes(x = log10(carat), y = log10(price))) + geom_hex()
 ```
 
 However, the disadvantage of this transformation is that the axes are now labelled with the transformed values, making it hard to interpret the plot.
@@ -583,7 +588,7 @@ This is visually identical, except the axes are labelled on the original data sc
 #|   fall into that bin. The axis labels are on the original data scale.
 
 ggplot(diamonds, aes(x = carat, y = price)) +
-  geom_bin2d() + 
+  geom_hex() + 
   scale_x_log10() + 
   scale_y_log10()
 ```
@@ -677,8 +682,8 @@ These scales are available as continuous (`c`), discrete (`d`), and binned (`b`)
 #| fig-width: 8
 #| fig-asp: 0.75
 #| fig-alt: |
-#|   Three hex plots where the color of the hexes show the number of observations 
-#|   that fall into that hex bin. The first plot uses the default, continuous 
+#|   Three plots.
+#|   The first plot uses the default, continuous 
 #|   ggplot2 scale. The second plot uses the viridis, continuous scale, and the 
 #|   third plot uses the viridis, binned scale.
 
@@ -687,15 +692,15 @@ df <- tibble(
   y = rnorm(10000)
 )
 
-ggplot(df, aes(x, y)) + geom_hex() +
-  labs(title = "Default, continuous", x = NULL, y = NULL) 
-
-ggplot(df, aes(x, y)) + geom_hex() +
+ggplot(df, aes(x, y, fill = x)) + geom_point(shape = 24) +
+  labs(title = "Default, continuous", x = NULL, y = NULL)
+  
+ggplot(df, aes(x, y, fill = x)) + geom_point(shape = 24)  +
   scale_fill_viridis_c() +
-  labs(title = "Viridis, continuous", x = NULL, y = NULL) 
+  labs(title = "Viridis, continuous", x = NULL, y = NULL)
 
-ggplot(df, aes(x, y)) + geom_hex() +
-  scale_fill_viridis_b() +
+ggplot(df, aes(x, y, fill = x)) + geom_point(shape = 24)  +
+  scale_fill_viridis_b() 
   labs(title = "Viridis, binned", x = NULL, y = NULL)
 ```
 
@@ -714,6 +719,7 @@ The plot on the left shows the relationship between engine size and fuel efficie
 The plot on the right shows the same variables, but subsets the data that are plotted.
 Subsetting the data has affected the x and y scales as well as the smooth curve.
 
+1.  Adjusting what data are plotted:
 ```{r}
 
 #| fig-width: 4
@@ -740,10 +746,11 @@ Let's compare these to the two plots below where the plot on the left sets the `
 We can see that reducing the limits is equivalent to subsetting the data.
 Therefore, to zoom in on a region of the plot, it's generally best to use `coord_cartesian()`.
 
+2.  Setting the limits in each scale (left)
+3.  Setting `xlim` and `ylim` in `coord_cartesian()` (right).
 ```{r}
 #| fig-width: 8
 
-#| warning: false
 #| fig-alt: |
 #|   On the left, scatterplot of highway mileage vs. displacement, with 
 #|   displacement ranging from 5 to 6 and highway mileage ranging from 
@@ -820,46 +827,48 @@ ggplot(suv, aes(x = displ, y = hwy, color = drv)) +
 
 In this particular case, you could have simply used faceting, but this technique is useful more generally, if for instance, you want to spread plots over multiple pages of a report.
 
+
 ### Exercises 1.4.6 {.unnumbered}
 
-1.  Why doesn't the following code override the default scale?
+1.  Why doesn't the following code override the default scale? Fix the plot so that it colors the points with a gradient set by `low = "yellow", high = "red"`.
 
 ```{r}
-    #| fig-show: "hide"
+
+#| fig-show: "hide"
 
 df <- tibble(x = rnorm(10000),
              y = rnorm(10000))
 
-ggplot(df, aes(x, y)) +
-  geom_hex(aes(x, y)) +
-  scale_color_gradient(low = "white", high = "red") 
+ggplot(df) +
+  geom_point(data = df, aes(x = x, y = y,fill = x, 
+    size = 5)) +
+    scale_fill_gradient(low= "yellow", high = "red")
+       
 ```
 
-
-Ans: 1.4.1.1
-```{r Ans: 1.4.1.1}
+Ans-1.4.1.1:
+```{r Ans-1.4.1.1}
 ```
 
 
 2.  What is the first argument to every scale?
     How does it compare to `labs()`?
     
-Ans: 1.4.1.2
+Ans-1.4.1.2:
 
 
-3.  First, create the following plot.
-    Then, modify the code using `override.aes` to make the legend easier to see.
+3.  First, create the following plot. Then, modify the code using `override.aes` to make the legend easier to see.
 
 ```{r}
-    #| fig-show: hide
+#| fig-show: hide
 
 ggplot(diamonds, aes(x = carat, y = price)) +
   geom_point(aes(color = cut), alpha = 1 / 20)
 ```
 
 
-Ans: 1.4.1.3
-```{r Ans: 1.4.1.3}
+Ans-1.4.1.3:
+```{r Ans-1.4.1.3}
 ```
 
 
@@ -876,7 +885,7 @@ Finally, you can customize the non-data elements of your plot with a theme:
 ggplot(mpg, aes(x = displ, y = hwy)) +
   geom_point(aes(color = class)) +
   geom_smooth(se = FALSE) +
-  theme_bw()
+  theme_classic()
 ```
 
 ggplot2 includes the eight themes shown in \@ref(fig:fig-themes), with `theme_gray()` as the default.[^communication-2]
@@ -947,6 +956,8 @@ The [ggplot2 book](https://ggplot2-book.org/) is also a great place to go for th
 1.  Pick a theme offered by the ggthemes package and apply it to this plot:
 
 ```{r}
+#| fig-show: hide
+
 ggplot(mpg, aes(x = displ, y = hwy, color = drv)) +
   geom_point() +
   labs(
@@ -956,8 +967,8 @@ ggplot(mpg, aes(x = displ, y = hwy, color = drv)) +
 ```
 
 
-Ans: 1.5.1.1
-```{r Ans: 1.5.1.1}
+Ans-1.5.1.1:
+```{r Ans-1.5.1.1}
 
 ```
 
@@ -965,8 +976,8 @@ Ans: 1.5.1.1
 2.  Make the axis labels of your plot blue and bolded.
 
 
-Ans: 1.5.1.2
-```{r Ans: 1.5.1.2}
+Ans-1.5.1.2:
+```{r Ans-1.5.1.2}
 
 
 
@@ -1098,8 +1109,8 @@ If you'd like to learn more about combining and layout out multiple plots with p
 ```
 
 
-Ans: 1.6.1.1
-```{r Ans: 1.6.1.1}
+Ans-1.6.1.1:
+```{r Ans-1.6.1.1}
 
 
 ```
@@ -1116,8 +1127,8 @@ knitr::include_graphics("images/3-plots.png")
 ```
 
 
-Ans: 1.6.1.2
-```{r Ans: 1.6.1.2}
+Ans-1.6.1.2:
+```{r Ans-1.6.1.2}
 
 ```
 

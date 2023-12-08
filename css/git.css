@@ -98,6 +98,11 @@ details[open] summary {
   font-size: 12px!important;
   
 }
+
+code span.do {
+    color: black!important;
+    font-style: italic;
+}
 p code {
   white-space: inherit;
   color: darkred!important;
