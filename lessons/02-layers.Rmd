@@ -442,10 +442,15 @@ p <- ggplot(df, aes(x, y, label = label))
 ```{r}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 #| fig-show: hide
 
 >>>>>>> 3726d27 (Delete 01-vizualization.Rmd)
+=======
+#| fig-show: hide
+
+>>>>>>> c442718 (ggiaever)
 ggplot(mpg, aes(x = displ, y = hwy)) +
   geom_smooth(aes(color = drv), show.legend = FALSE)
 ```
@@ -468,7 +473,11 @@ Ans: 2.3.1.3:
 
 4.  Recreate the R code necessary to generate and save the following graph (\@ref(fig:fig-6-plots)), and arrange them in a figure with 2 columns. Note that wherever a categorical variable is used in the plot, it's `drv`. Use the mathematical notation in one, and the function from `patchwork`, `plot_layout` in another for laying out the plot.
 
+<<<<<<< HEAD
 ```{r}
+=======
+```{r fig-6-plots}
+>>>>>>> c442718 (ggiaever)
 #| label: fig-6-plots
 #| echo: false
 #| out-width: "100%"
@@ -507,12 +516,18 @@ ggplot(mpg, aes(x = displ, y = hwy)) +
   geom_point(size = 4, color = "white") +
   geom_point(aes(color = drv))
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> c442718 (ggiaever)
 
 
 knitr::include_graphics("images/6-plots.png")
 
+<<<<<<< HEAD
 >>>>>>> 3726d27 (Delete 01-vizualization.Rmd)
+=======
+>>>>>>> c442718 (ggiaever)
 ```
 
 <div class = "fold s o"
@@ -692,7 +707,9 @@ Ans: 2.4.1.5:
 
 6.  Which of the following plots makes it easier to compare engine size (`displ`) across cars with different drive trains? What does this say about when to place a faceting variable across rows or columns?
 
-```{r Ans: 2.4.1.6}
+```{r}
+
+#| fig-show: hide
 
 <<<<<<< HEAD
 ggplot(mpg, aes(x = displ)) +
@@ -702,6 +719,7 @@ ggplot(mpg, aes(x = displ)) +
 ggplot(mpg, aes(x = displ)) +
   geom_histogram() +
   facet_grid(. ~ drv)
+<<<<<<< HEAD
 =======
 #| fig-show: hide
 
@@ -713,6 +731,9 @@ ggplot(mpg, aes(x = displ)) +
   geom_histogram() +
 
 >>>>>>> 3726d27 (Delete 01-vizualization.Rmd)
+=======
+
+>>>>>>> c442718 (ggiaever)
 ```
 
 
@@ -1039,10 +1060,15 @@ To learn more about a position adjustment, look up the help page associated with
 ```{r}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 #| fig-show: hide
 
 >>>>>>> 3726d27 (Delete 01-vizualization.Rmd)
+=======
+#| fig-show: hide
+
+>>>>>>> c442718 (ggiaever)
 ggplot(mpg, aes(x = cty, y = hwy)) + geom_point()
 ```
 
@@ -1052,6 +1078,7 @@ Ans: 2.6.1.1:
 
 
 ```{r}
+<<<<<<< HEAD
 <<<<<<< HEAD
 (ggplot(mpg, aes(x = displ, y = hwy)) +
   geom_point()) + (ggplot(mpg, aes(x = displ, y = hwy)) +
@@ -1066,6 +1093,16 @@ ggplot(mpg, aes(x = displ, y = hwy) +
 ggplot(mpg, aes(x = displ, y = hwy)) +
   geom_point(position = "identity")      
 >>>>>>> 3726d27 (Delete 01-vizualization.Rmd)
+=======
+
+#| fig-show: hide
+
+ggplot(mpg, aes(x = displ, y = hwy)) +
+  geom_point()
+
+ggplot(mpg, aes(x = displ, y = hwy)) +
+  geom_point(position = "identity")      
+>>>>>>> c442718 (ggiaever)
 ```
 
 Ans: 2.6.1.2:
