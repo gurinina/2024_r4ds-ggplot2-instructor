@@ -2,7 +2,8 @@
 
 knitr::opts_chunk$set(
   fig.width = 8,
-  fig.asp = 2/3,
+  # fig.height = 6,
+  fig.asp = 0.7,
   message = FALSE,
   warning = FALSE,
   tidy = TRUE,
