@@ -27,11 +27,12 @@ To access the datasets, help pages, and functions used in this chapter, first in
 
 ```
 
-Then load the `tidyverse` and the `patchwork` packages by into your session:
+Then load the `tidyverse`, `scales` and `patchwork` packages by into your session:
 
 ```{r}
 library(tidyverse)
 library(patchwork)
+library(scales)
 ```
 
 ## Aesthetic mappings 
@@ -74,7 +75,7 @@ We can do this with a scatterplot where the numerical variables are mapped to th
 ggplot(mpg, aes(x = displ, y = hwy, color = class)) + geom_point() + ggplot(mpg, aes(x = displ, y = hwy, shape = class)) + geom_point() + plot_layout(nrow = 2)
 ```
 
-Note the use of `plot_layout` from the `patchwork` package to layout the plots in two rows. You can also use mathematical symbols to layout ggplots:
+Note the use of `plot_layout` from the `patchwork` package to layout the plots in two rows. You can also use mathematical symbols to layout `ggplots`:
 
 Use `+` to plot them side-by-side:
 ```{r}
@@ -99,8 +100,7 @@ p1/p2
 
 When `class` is mapped to `shape`, we get two warnings:
 
-> 1: The shape palette can deal with a maximum of 6 discrete values because more than 6 becomes difficult to discriminate; you have 7.
-> Consider specifying shapes manually if you must have them.
+> 1: The shape palette can deal with a maximum of 6 discrete values because more than 6 becomes difficult to discriminate; you have 7. Consider specifying shapes manually if you must have them.
 >
 > 2: Removed 62 rows containing missing values (`geom_point()`).
 
@@ -113,30 +113,36 @@ Similarly, we can map `class` to `size` or `alpha` aesthetics as well, which con
 #| fig-alt: |
 #|   Two scatterplots next to each other, both visualizing highway fuel 
 #|   efficiency versus engine size of cars and showing a negative 
-#|   association. In the plot on the left class is mapped to the size 
+#|   association. In the first plot class is mapped to the size 
 #|   aesthetic, resulting in different sizes for each class. 
-#|   In the plot on the right class is mapped the alpha aesthetic, 
+#|   In the second plot class is mapped the alpha aesthetic, 
 #|   resulting in different alpha (transparency) levels for each class. 
 #|   Each plot comes with a legend that shows the mapping between size 
 #|   or alpha level and levels of the class variable.
 
+# class mapped to size
 ggplot(mpg, aes(x = displ, y = hwy, size = class)) +
-  geom_point() + ggplot(mpg, aes(x = displ, y = hwy, alpha = class)) +
-  geom_point() + plot_layout(ncol = 2)
+  geom_point() 
+
+# class mapped to alpha
+ggplot(mpg, aes(x = displ, y = hwy, alpha = class)) +
+  geom_point() +   plot_layout(ncol = 2) +
+  theme(aspect.ratio = 2/3)
 ```
 
 Both of these produce warnings as well:
 
+> Using size for a discrete variable is not advised. 
 > Using alpha for a discrete variable is not advised.
 
 Mapping an unordered discrete (categorical) variable (`class`) to an ordered aesthetic (`size` or `alpha`) is generally not a good idea because it implies a ranking that does not in fact exist.
 
-Once you map an aesthetic, ggplot2 takes care of the rest.
+Once you map an aesthetic, `ggplot2` takes care of the rest.
 It selects a reasonable scale to use with the aesthetic, and it constructs a legend that explains the mapping between levels and values.
 For x and y aesthetics, ggplot2 does not create a legend, but it creates an axis line with tick marks and a label.
 The axis line provides the same information as a legend; it explains the mapping between locations and values.
 
-You can also set the visual properties of your geom manually as an argument of your geom function (*outside* of `aes()`) instead of relying on a variable mapping to determine the appearance.
+You can also set the visual properties of your `geom` manually as an argument of your `geom` function (*outside* of `aes()`) instead of relying on a variable mapping to determine the appearance.
 For example, we can make all of the points in our plot blue:
 
 ```{r}
@@ -253,31 +259,23 @@ ggplot(mpg) + geom_point(aes(x = displ, y = hwy))
 How are these two plots similar?
 
 ```{r}
-#| echo: false
 #| fig-show: hide
-#| fig-alt: |
-#|   There are two plots. The plot on the left is a scatterplot of highway 
-#|   fuel efficiency versus engine size of cars and the plot on the right 
-#|   shows a smooth curve that follows the trajectory of the relationship 
-#|   between these variables. A confidence interval around the smooth 
-#|   curve is also displayed.
+#| echo: false
 
 ggplot(mpg, aes(x = displ, y = hwy)) + geom_point() 
 
 ggplot(mpg, aes(x = displ, y = hwy)) + geom_smooth()
 ```
 
-Both plots contain the same x variable, the same y variable, and both describe the same data. But the plots are not identical. Each plot uses a different geometric object, geom, to represent the data. The plot on the left uses the point geom, and the plot on the right uses the smooth geom, a smooth line fitted to the data.
+Both plots contain the same x variable, the same y variable, and both describe the same data. But the plots are not identical. Each plot uses a different geometric object, `geom`, to represent the data. The first plot uses the point geom, and the plot on the second uses the smooth geom, a smooth line fitted to the data.
 
 To change the geom in your plot, change the geom function that you add to `ggplot()`. For instance, to make the plots above, you can use the following code:
 
 ```{r}
-#| fig-show: hide
-
-# Top
+# point
 ggplot(mpg, aes(x = displ, y = hwy)) + geom_point() 
 
-# Bottom
+# smooth
 ggplot(mpg, aes(x = displ, y = hwy)) + geom_smooth()
 ```
 
@@ -286,14 +284,13 @@ Every geom function in ggplot2 takes a `mapping` argument, either defined locall
 However, not every aesthetic works with every geom.
 You could set the shape of a point, but you couldn't set the "shape" of a line. If you try, ggplot2 will silently ignore that aesthetic mapping. On the other hand, you *could* set the linetype of a line.
 
-`geom_smooth()` will draw a different line, with a different linetype, for each unique value of the variable that you map to linetype.
+`geom_smooth()` will draw a different line, with a different `linetype`, for each unique value of the variable that you map to `linetype`.
 
 ```{r}
-#| fig-show: hold
 #| fig-alt: |
 #|   Two plots of highway fuel efficiency versus engine size of cars.
-#|   The data are represented with smooth curves. On the left, three 
-#|   smooth curves, all with the same linetype. On the right, three 
+#|   The data are represented with smooth curves. In the first plot, three 
+#|   smooth curves, all with the same linetype. In the second plot, three 
 #|   smooth curves with different line types (solid, dashed, or long 
 #|   dashed) for each type of drive train. In both plots, confidence 
 #|   intervals around the smooth curves are also displayed.
@@ -306,6 +303,8 @@ ggplot(mpg, aes(x = displ, y = hwy, linetype = drv)) + geom_smooth()
 ```
 
 Here, `geom_smooth()` separates the cars into three lines based on their `drv` value, which describes a car's drive train. One line describes all of the points that have a `4` value, one line describes all of the points that have an `f` value, and one line describes all of the points that have an `r` value. Here, `4` stands for four-wheel drive, `f` for front-wheel drive, and `r` for rear-wheel drive.
+
+**Notice there is no legend for the first plot because geometric smooth does not have a shape aesthetic.**
 
 If this sounds strange, we can make it clearer by overlaying the lines on top of the raw data and then coloring everything according to `drv`.
 
@@ -330,8 +329,7 @@ In practice, ggplot2 will automatically group the data for these geoms whenever 
 It is convenient to rely on this feature because the `group` aesthetic by itself does not add a legend or distinguishing features to the geoms.
 
 
-If you place mappings in a geom function, ggplot2 will treat them as local mappings for the layer. It will use these mappings to extend or overwrite the global mappings *for that layer only*.
- his makes it possible to display different aesthetics in different layers.
+If you place mappings in a geom function, ggplot2 will treat them as local mappings for the layer. It will use these mappings to extend or overwrite the global mappings *for that layer only*. This makes it possible to display different aesthetics in different layers.
 
 ```{r}
 
@@ -373,18 +371,17 @@ Geoms are the fundamental building blocks of ggplot2. You can completely transfo
 For example, the histogram and density plot below reveal that the distribution of highway mileage is bimodal and right skewed while the boxplot reveals two potential outliers.
 
 ```{r}
-
 #| fig-alt: |
 #|   Three plots: histogram, density plot, and box plot of highway
 #|   mileage.
  
-# Top
+# histogram
 ggplot(mpg, aes(x = hwy)) + geom_histogram(binwidth = 2)
 
-# Middle
+# density
 ggplot(mpg, aes(x = hwy)) + geom_density()
 
-# Bottom
+# boxplot
 ggplot(mpg, aes(x = hwy)) + geom_boxplot()
 ```
 
@@ -533,7 +530,7 @@ ggplot(mpg, aes(x = displ, y = hwy)) +
   facet_grid(drv ~ cyl)
 ```
 
-By default each of the facets share the same scale and range for x and y axes.
+ The first argument in `facet_grid` determines the faceting by column, the second by row. By default each of the facets share the same scale and range for x and y axes.
 
 This is useful when you want to compare data across facets but it can be limiting when you want to visualize the relationship within each facet better.
 
@@ -772,9 +769,9 @@ However, there are three reasons why you might need to use a stat explicitly:
 1.  You might want to override the default stat. In the code below, we change the stat of `geom_bar()` from count (the default) to identity.This lets us map the height of the bars to the raw values of a y variable.
 
 ```{r}
-    #| 
-    #| fig-alt: |
-    #| Bar chart of number of each cut of diamond. There are roughly 1500 Fair, 5000 Good, 12000 Very Good, 14000 Premium, and 22000 Ideal cut diamonds.
+#| 
+#| fig-alt: |
+#| Bar chart of number of each cut of diamond. There are roughly 1500 Fair, 5000 Good, 12000 Very Good, 14000 Premium, and 22000 Ideal cut diamonds.
 
 diamonds %>%
   count(cut) %>%
@@ -786,11 +783,11 @@ diamonds %>%
     For example, you might want to display a bar chart of proportions, rather than counts:
 
 ```{r}
-    #| 
-    #| fig-alt: |
-    #|   Bar chart of proportion of each cut of diamond. Roughly, Fair 
-    #|   diamonds make up 0.03, Good 0.09, Very Good 0.22, Premium 0.26, and 
-    #|   Ideal 0.40.
+#| 
+#| fig-alt: |
+#|   Bar chart of proportion of each cut of diamond. Roughly, Fair 
+#|   diamonds make up 0.03, Good 0.09, Very Good 0.22, Premium 0.26, and 
+#|   Ideal 0.40.
 
 ggplot(diamonds, aes(x = cut, y = after_stat(prop), group = 1)) +
   geom_bar()
@@ -802,12 +799,12 @@ ggplot(diamonds, aes(x = cut, y = after_stat(prop), group = 1)) +
     For example, you might use `stat_summary()`, which summarizes the y values for each unique x value, to draw attention to the summary that you're computing:
 
 ```{r}
-    #| fig-alt: |
-    #|   A plot with depth on the y-axis and cut on the x-axis (with levels 
-    #|   fair, good, very good, premium, and ideal) of diamonds. For each level 
-    #|   of cut, vertical lines extend from minimum to maximum depth for diamonds 
-    #|   in that cut category, and the median depth is indicated on the line 
-    #|   with a point.
+#| fig-alt: |
+#|   A plot with depth on the y-axis and cut on the x-axis (with levels 
+#|   fair, good, very good, premium, and ideal) of diamonds. For each level 
+#|   of cut, vertical lines extend from minimum to maximum depth for diamonds 
+#|   in that cut category, and the median depth is indicated on the line 
+#|   with a point.
 
 
 ggplot(diamonds) +
@@ -932,14 +929,14 @@ If you don't want a stacked bar chart, you can use one of three other options: `
     To see that overlapping we either need to make the bars slightly transparent by setting `alpha` to a small value, or completely transparent by setting `fill = NA`.
 
 ```{r}
-    #| fig-alt: |
-    #|   Segmented bar chart of drive types of cars, where each bar is filled with 
-    #|   colors for the classes of cars. Heights of the bars correspond to the 
-    #|   number of cars in each drive category, and heights of the colored 
-    #|   segments are proportional to the number of cars with a given class 
-    #|   level within a given drive type level. However the segments overlap. In 
-    #|   the first plot the bars are filled with transparent colors
-    #|   and in the second plot they are only outlined with color.
+#| fig-alt: |
+#|   Segmented bar chart of drive types of cars, where each bar is filled with 
+#|   colors for the classes of cars. Heights of the bars correspond to the 
+#|   number of cars in each drive category, and heights of the colored 
+#|   segments are proportional to the number of cars with a given class 
+#|   level within a given drive type level. However the segments overlap. In 
+#|   the first plot the bars are filled with transparent colors
+#|   and in the second plot they are only outlined with color.
 
 # Top
 ggplot(mpg, aes(x = drv, fill = class)) +
@@ -959,25 +956,25 @@ The identity position adjustment is more useful for 2d geoms, like points, where
     This makes it easier to compare individual values.
 
 ```{r}
-    #| layout-ncol: 2
-    #| fig-width: 4
-    #| fig-alt: |
-    #|   On the left, segmented bar chart of drive types of cars, where each bar is 
-    #|   filled with colors for the levels of class. Height of each bar is 1 and 
-    #|   heights of the colored segments represent the proportions of cars 
-    #|   with a given class level within a given drive type.
-    #|   On the right, dodged bar chart of drive types of cars. Dodged bars are 
-    #|   grouped by levels of drive type. Within each group bars represent each 
-    #|   level of class. Some classes are represented within some drive types and 
-    #|   not represented in others, resulting in unequal number of bars within each 
-    #|   group. Heights of these bars represent the number of cars with a given 
-    #|   level of drive type and class.
+#| layout-ncol: 2
+#| fig-width: 4
+#| fig-alt: |
+#|   In the first plot, segmented bar chart of drive types of cars, where each bar is 
+#|   filled with colors for the levels of class. Height of each bar is 1 and 
+#|   heights of the colored segments represent the proportions of cars 
+#|   with a given class level within a given drive type.
+#|   In the second plot, dodged bar chart of drive types of cars. Dodged bars are 
+#|   grouped by levels of drive type. Within each group bars represent each 
+#|   level of class. Some classes are represented within some drive types and 
+#|   not represented in others, resulting in unequal number of bars within each 
+#|   group. Heights of these bars represent the number of cars with a given 
+#|   level of drive type and class.
 
-# Left
+
 ggplot(mpg, aes(x = drv, fill = class)) +
   geom_bar(position = "fill")
 
-# Right
+
 ggplot(mpg, aes(x = drv, fill = class)) +
   geom_bar(position = "dodge")
 ```
@@ -1071,7 +1068,7 @@ g <- ggplot(mpg, aes(x = displ, y = hwy))
 #| fig-show: hide
 
 g <- ggplot(data = mpg,
-       mapping = aes(x = manufacturer, y = hwy, color = manufacturer)) 
+ mapping = aes(x = manufacturer, y = hwy, color = manufacturer)) 
 
 ```
 

@@ -14,7 +14,7 @@ bookdown::gitbook:
     sharing:
       github: yes
       facebook: no
-    download: ["pdf", "epub"]
+    download: ["r4ds.pdf", "r4ds.epub"]
     fig_height: 5.3
     fig_width: 8.5
 bookdown::word_document2:
@@ -24,12 +24,12 @@ bookdown::word_document2:
   fig_width: 8.5
 bookdown::html_chapters:
   includes:
-    in_header: includes/header.html
+    in_header: "includes/header.html"
     after_body: "scripts/collapse-output.html"
   css: [css/git.css,css/toc.css]
 bookdown::pdf_book:
   includes:
-   in_header: lessons/preamble.tex
+   in_header: preamble.tex
   keep_tex: yes
   dev: "cairo_pdf"
   latex_engine: xelatex
@@ -40,12 +40,7 @@ bookdown::pdf_book:
   toc_unnumbered: no
   toc_appendix: yes
   quote_footer: ["\\VA{", "}{}"]
-bookdown::epub_book:
-  includes:
-    in_header: includes/header.html
-    after_body: "scripts/uncover.html"
-  dev: svglite
-  gitesheet: css/git.css
+bookdown::epub_book: default
 bookdown::bs4_book:
   includes:
     in_header: includes/header.html

@@ -1,9 +1,9 @@
 
 
 knitr::opts_chunk$set(
-  fig.width = 8,
-  # fig.height = 6,
-  fig.asp = 0.7,
+  fig.width = 7,
+  fig.height = 5,
+  # fig.asp = 0.7,
   fig.align = "center",
   message = FALSE,
   warning = FALSE,

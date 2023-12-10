@@ -453,7 +453,6 @@ Note that `breaks` is in the original scale of the data.
 #|   by $5,000. The x-axis labels on the right plot start at $1K and go to 
 #|   $19K, increasing by $6K. 
 
-# Left-# Right
 ggplot(diamonds, aes(x = price, y = cut)) +
   geom_boxplot(alpha = 0.05) +
   scale_x_continuous(labels = label_dollar()) + ggplot(diamonds, aes(x = price, y = cut)) +
@@ -512,19 +511,19 @@ We'll come back to themes at the end of the chapter, but in brief, they control 
 The theme setting `legend.position` controls where the legend is drawn:
 
 ```{r}
-#| fig-width: 8
 #| fig-alt: |
 #|   Four scatterplots of highway fuel efficiency versus engine size of cars 
 #|   where points are colored based on class of car. Clockwise, the legend 
 #|   is placed on the right, left, top, and bottom of the plot.
 
 base <- ggplot(mpg, aes(x = displ, y = hwy)) +
-  geom_point(aes(color = class))
+  geom_point(aes(color = class)) 
 
- # the default 
+ # the default  right, then left
 base + theme(legend.position = "right") +
-base + theme(legend.position = "left")
+base + theme(legend.position = "left") 
 
+ # then top, then bottom
 base + 
   theme(legend.position = "top") +
   guides(color = guide_legend(nrow = 3)) +
@@ -567,16 +566,19 @@ It's very useful to plot transformations of your variable.
 For example, it's easier to see the precise relationship between `carat` and `price` if we log transform them:
 
 ```{r}
-#| fig-width: 8
+#| fig-width: 7
 #| fig-alt: |
 #|   Two plots of price versus carat of diamonds. Data binned and the color of 
 #|   the rectangles representing each bin based on the number of points that 
-#|   fall into that bin. In the plot on the right, price and carat values 
+#|   fall into that bin. In the second plot, price and carat values 
 #|   are logged and the axis labels shows the logged values.
 
-# Left-# Right
+# price vs. caret
 ggplot(diamonds, aes(x = carat, y = price)) +
-  geom_hex() + ggplot(diamonds, aes(x = log10(carat), y = log10(price))) + geom_hex()
+  geom_hex()
+
+# log10 price vs log10 caret
+ggplot(diamonds, aes(x = log10(carat), y = log10(price))) + geom_hex()
 ```
 
 However, the disadvantage of this transformation is that the axes are now labelled with the transformed values, making it hard to interpret the plot.
@@ -606,14 +608,17 @@ The two plots below look similar, but there is enough difference in the shades o
 #| fig-width: 8
 #| fig-alt: |
 #|   Two scatterplots of highway mileage versus engine size where points are 
-#|   colored by drive type. The plot on the left uses the default 
+#|   colored by drive type. The first plot uses the default 
 #|   ggplot2 color palette and the plot on the right uses a different color 
 #|   palette.
 
-(ggplot(mpg, aes(x = displ, y = hwy)) +
-  geom_point(aes(color = drv))) / (ggplot(mpg, aes(x = displ, y = hwy)) +
-  geom_point(aes(color = drv)) +
-  scale_color_brewer(palette = "Set1"))
+# default color palette
+ggplot(mpg, aes(x = displ, y = hwy)) +
+  geom_point(aes(color = drv)) 
+
+# RColorBrewer palette
+ggplot(mpg, aes(x = displ, y = hwy)) + geom_point(aes(color = drv)) + 
+  scale_color_brewer(palette = "Set1")
 ```
 
 Don't forget simpler techniques for improving accessibility.
@@ -679,8 +684,7 @@ The designers, Nathaniel Smith and Stéfan van der Walt, carefully tailored cont
 These scales are available as continuous (`c`), discrete (`d`), and binned (`b`) palettes in ggplot2.
 
 ```{r}
-#| fig-width: 8
-#| fig-asp: 0.75
+#| fig-width: 6
 #| fig-alt: |
 #|   Three plots.
 #|   The first plot uses the default, continuous 
@@ -692,13 +696,13 @@ df <- tibble(
   y = rnorm(10000)
 )
 
-ggplot(df, aes(x, y, fill = x)) + geom_point(shape = 24) +
+ggplot(df, aes(x, y, fill = x)) + geom_point(shape = 24, size = 3) +
   labs(title = "Default, continuous", x = NULL, y = NULL)
   
-ggplot(df, aes(x, y, fill = x)) + geom_point(shape = 24)  + scale_fill_viridis_c() +
+ggplot(df, aes(x, y, fill = x)) + geom_point(shape = 24, size = 3)  + scale_fill_viridis_c() +
   labs(title = "Viridis, continuous", x = NULL, y = NULL)
 
-ggplot(df, aes(x, y, fill = x)) + geom_point(shape = 24)  + scale_fill_viridis_b() 
+ggplot(df, aes(x, y, fill = x)) + geom_point(shape = 24, size = 3)  + scale_fill_viridis_b() 
   labs(title = "Viridis, binned", x = NULL, y = NULL)
 ```
 
@@ -719,9 +723,7 @@ Subsetting the data has affected the x and y scales as well as the smooth curve.
 
 1.  Adjusting what data are plotted:
 ```{r}
-
-#| fig-width: 4
-
+#| fig-width: 8
 #| fig-alt: |
 #|   On the left, scatterplot of highway mileage vs. displacement, with 
 #|   displacement. The smooth curve overlaid shows a decreasing, and then 
@@ -730,7 +732,7 @@ Subsetting the data has affected the x and y scales as well as the smooth curve.
 #|   mileage ranging only from 10 to 25. The smooth curve overlaid shows a 
 #|   trend that's slightly increasing first and then decreasing. 
 
-# Left-# Right
+# All data vs. subsetted data
 ggplot(mpg, aes(x = displ, y = hwy)) +
   geom_point(aes(color = drv)) +
   geom_smooth() + mpg |>
@@ -747,8 +749,6 @@ Therefore, to zoom in on a region of the plot, it's generally best to use `coord
 2.  Setting the limits in each scale (left)
 3.  Setting `xlim` and `ylim` in `coord_cartesian()` (right).
 ```{r}
-#| fig-width: 8
-
 #| fig-alt: |
 #|   On the left, scatterplot of highway mileage vs. displacement, with 
 #|   displacement ranging from 5 to 6 and highway mileage ranging from 
@@ -757,7 +757,7 @@ Therefore, to zoom in on a region of the plot, it's generally best to use `coord
 #|   are plotted with the same limits, however the smooth curve overlaid
 #|   shows a relatively flat trend with a slight increase at the end.
 
-# Left-# Right
+# Limiting scale (equivalent to subsetting) vs. zooming in on data
 ggplot(mpg, aes(x = displ, y = hwy)) +
   geom_point(aes(color = drv)) +
   geom_smooth() +
@@ -771,7 +771,6 @@ On the other hand, setting the `limits` on individual scales is generally more u
 For example, if we extract two classes of cars and plot them separately, it's difficult to compare the plots because all three scales (the x-axis, the y-axis, and the color aesthetic) have different ranges.
 
 ```{r}
-#| fig-width: 8
 #| fig-alt: |
 #|   On the left, a scatterplot of highway mileage vs. displacement of SUVs.
 #|   On the right, a scatterplot of the same variables for compact cars.
@@ -785,7 +784,7 @@ For example, if we extract two classes of cars and plot them separately, it's di
 suv <- mpg |> filter(class == "suv")
 compact <- mpg |> filter(class == "compact")
 
-# Left-# Right
+# suv vs compact
 ggplot(suv, aes(x = displ, y = hwy, color = drv)) +
   geom_point() + ggplot(compact, aes(x = displ, y = hwy, color = drv)) +
   geom_point()
@@ -794,8 +793,6 @@ ggplot(suv, aes(x = displ, y = hwy, color = drv)) +
 One way to overcome this problem is to share scales across multiple plots, training the scales with the `limits` of the full data.
 
 ```{r}
-
-#| fig-width: 8
 #| fig-alt: |
 #|   On the left, a scatterplot of highway mileage vs. displacement of SUVs.
 #|   On the right, a scatterplot of the same variables for compact cars.
@@ -811,7 +808,7 @@ x_scale <- scale_x_continuous(limits = range(mpg$displ))
 y_scale <- scale_y_continuous(limits = range(mpg$hwy))
 col_scale <- scale_color_discrete(limits = unique(mpg$drv))
 
-# Left-# Right
+# suv vs. compact on the same scale
 ggplot(suv, aes(x = displ, y = hwy, color = drv)) +
   geom_point() +
   x_scale +
@@ -831,15 +828,13 @@ In this particular case, you could have simply used faceting, but this technique
 1.  Why doesn't the following code override the default scale? Fix the plot so that it colors the points with a gradient set by `low = "yellow", high = "red"`.
 
 ```{r}
-
 #| fig-show: "hide"
 
 df <- tibble(x = rnorm(10000),
              y = rnorm(10000))
 
 ggplot(df) +
-  geom_point(data = df, aes(x = x, y = y,fill = x, 
-    size = 5)) +
+  geom_point(aes(x = x, y = y,fill = x)) +
     scale_fill_gradient(low= "yellow", high = "red")
        
 ```
