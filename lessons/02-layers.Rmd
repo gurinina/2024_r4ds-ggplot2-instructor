@@ -486,7 +486,8 @@ Try it.
 #|   line types are fitted to each level of drive train. And 
 #|   finally in the **sixth** plot points are represented in different colors 
 #|   for each level of drive train and they have a thick white border.
-
+#| fig-cap: |
+#| Six plots arranged in two columns
 
 knitr::include_graphics("images/6-plots.png")
 ```
