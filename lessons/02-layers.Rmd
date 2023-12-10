@@ -471,6 +471,8 @@ Try it.
 #| label: 6-plots
 #| echo: false
 #| out-width: "100%"
+#| fig-cap: |
+#|   Six plots arranged in two columns
 #| fig-alt: |
 #|   There are six scatterplots in this figure, arranged in a 3x2 grid. 
 #|   In all plots highway fuel efficiency of cars are on the y-axis and 
@@ -486,8 +488,6 @@ Try it.
 #|   line types are fitted to each level of drive train. And 
 #|   finally in the **sixth** plot points are represented in different colors 
 #|   for each level of drive train and they have a thick white border.
-#| fig-cap: |
-#| Six plots arranged in two columns
 
 knitr::include_graphics("images/6-plots.png")
 ```
