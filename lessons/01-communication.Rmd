@@ -486,8 +486,9 @@ For example, take this plot that shows when each US president started and ended 
 #|   presidency. Start year is marked with a point and a segment that starts 
 #|   there and ends at the end of the presidency. The x-axis labels are 
 #|   formatted as two digit years starting with an apostrophe, e.g., '53.
-
-presidential |> mutate(id = 33 + row_number()) |> # the ordinal number of the president, e.g. Trump is in the 12th row + 33 = 45th president
+#|   
+# here `id` is the ordinal number of the president, e.g. Trump is in the 12th row + 33 = 45th president
+presidential |> mutate(id = 33 + row_number()) |> 
   ggplot(aes(x = start, y = id)) +
   geom_point() +
   geom_segment(aes(xend = end, yend = id)) +
