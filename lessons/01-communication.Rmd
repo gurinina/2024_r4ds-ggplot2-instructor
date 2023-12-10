@@ -105,11 +105,7 @@ ggplot(df, aes(x, y)) +
 
 1.  Create a boxplot using the fuel economy data with x = `hwy` and y = `class` customized `title`, `subtitle`, `caption`, `x`, `y`, and `color` labels.
 
-<<<<<<< HEAD
-Ans-1.2.1.1:
-=======
 **Ans-1.2.1.1:**
->>>>>>> b0b556a (ggiaever)
 ```{r Ans-1.2.1.1}
 # enter your answer here
 ```
@@ -126,11 +122,7 @@ Ans-1.2.1.1:
 knitr::include_graphics("images/fueleconomy.png")
 ```
 
-<<<<<<< HEAD
-Ans-1.2.1.2:
-=======
 **Ans-1.2.1.2**
->>>>>>> b0b556a (ggiaever)
 ```{r Ans-1.2.1.2}
   
 ```
@@ -302,11 +294,7 @@ The only limit is your imagination (and your patience with positioning annotatio
 
 1.  Use `geom_text()` with infinite positions to place text at the four corners of the plot. **Hint: construct a `data.frame` similar to `label_info` with the coordinate positions.**
 
-<<<<<<< HEAD
-Ans-1.3.1.1:
-=======
 **Ans-1.3.1.1:**
->>>>>>> b0b556a (ggiaever)
 ```{r Ans-1.3.1.1}
 
 ```
@@ -320,11 +308,7 @@ ggplot(mpg, aes(displ, hwy)) +
 ```
     
 
-<<<<<<< HEAD
-Ans-1.3.1.2:
-=======
 **Ans-1.3.1.2:**
->>>>>>> b0b556a (ggiaever)
 ```{r Ans-1.3.1.2}
 
 ```
@@ -337,62 +321,37 @@ g <- ggplot(mpg, aes(displ, hwy)) + geom_point()
 ```
 
 
-<<<<<<< HEAD
-Ans-1.3.1.3a:
-=======
 **Ans-1.3.1.3a:**
->>>>>>> b0b556a (ggiaever)
 ```{r Ans-1.3.1.3a}
 
 ```
 
 
-<<<<<<< HEAD
-    b. How can you add a label to a single facet?
-    
-Ans-1.3.1.3b:
-=======
   b. How can you add a label to a single facet?
     
 **Ans-1.3.1.3b:**
->>>>>>> b0b556a (ggiaever)
 ```{r Ans-1.3.1.3b}
 
 
 ```
 
-<<<<<<< HEAD
-    c. How can you put a different label in each facet?
-    (Hint: Think about the dataset that is being passed to `geom_text()`.)
-    
-Ans-1.3.1.3c:
-=======
   c. How can you put a different label in each facet?
     (Hint: Think about the dataset that is being passed to `geom_text()`.)
     
 **Ans-1.3.1.3c:**
->>>>>>> b0b556a (ggiaever)
 ```{r Ans-1.3.1.3c}
 
 ```
 
 4.  What arguments to `geom_label()` control the appearance of the background box?
 
-<<<<<<< HEAD
-Ans-1.3.1.4:
-=======
 **Ans-1.3.1.4:
->>>>>>> b0b556a (ggiaever)
 
 5.  What are the four arguments to `arrow()`?
     How do they work?
     Create a series of plots that demonstrate the most important options.
 
-<<<<<<< HEAD
-Ans-1.3.1.5:
-=======
 **Ans-1.3.1.5:**
->>>>>>> b0b556a (ggiaever)
 
 ## Scales
 
@@ -526,8 +485,7 @@ For example, take this plot that shows when each US president started and ended 
 #|   there and ends at the end of the presidency. The x-axis labels are 
 #|   formatted as two digit years starting with an apostrophe, e.g., '53.
 
-presidential |>
-  mutate(id = 33 + row_number()) |> # the ordinal number of the president, e.g. Trump is in the 12th row + 33 = 45th president
+presidential |> mutate(id = 33 + row_number()) |> # the ordinal number of the president, e.g. Trump is in the 12th row + 33 = 45th president
   ggplot(aes(x = start, y = id)) +
   geom_point() +
   geom_segment(aes(xend = end, yend = id)) +
@@ -701,8 +659,7 @@ One approach for assigning these colors is using hex color codes:
 #|   there and ends at the end of the presidency. Democratic presidents are 
 #|   represented in blue and Republicans in red.
 
-presidential |>
-  mutate(id = 33 + row_number()) |>
+presidential |> mutate(id = 33 + row_number()) |>
   ggplot(aes(x = start, y = id, color = party)) +
   geom_point() +
   geom_segment(aes(xend = end, yend = id)) +
@@ -887,11 +844,7 @@ ggplot(df) +
        
 ```
 
-<<<<<<< HEAD
-Ans-1.4.1.1:
-=======
 **Ans-1.4.1.1:**
->>>>>>> b0b556a (ggiaever)
 ```{r Ans-1.4.1.1}
 ```
 
@@ -899,11 +852,7 @@ Ans-1.4.1.1:
 2.  What is the first argument to every scale?
     How does it compare to `labs()`?
     
-<<<<<<< HEAD
-Ans-1.4.1.2:
-=======
 **Ans-1.4.1.2:**
->>>>>>> b0b556a (ggiaever)
 
 
 3.  First, create the following plot. Then, modify the code using `override.aes` to make the legend easier to see.
@@ -916,11 +865,7 @@ ggplot(diamonds, aes(x = carat, y = price)) +
 ```
 
 
-<<<<<<< HEAD
-Ans-1.4.1.3:
-=======
 **Ans-1.4.1.3:**
->>>>>>> b0b556a (ggiaever)
 ```{r Ans-1.4.1.3}
 ```
 
@@ -1020,11 +965,7 @@ ggplot(mpg, aes(x = displ, y = hwy, color = drv)) +
 ```
 
 
-<<<<<<< HEAD
-Ans-1.5.1.1:
-=======
 **Ans-1.5.1.1:**
->>>>>>> b0b556a (ggiaever)
 ```{r Ans-1.5.1.1}
 
 ```
@@ -1033,11 +974,7 @@ Ans-1.5.1.1:
 2.  Make the axis labels of your plot blue and bolded.
 
 
-<<<<<<< HEAD
-Ans-1.5.1.2:
-=======
 **Ans-1.5.1.2:**
->>>>>>> b0b556a (ggiaever)
 ```{r Ans-1.5.1.2}
 
 
@@ -1170,11 +1107,7 @@ If you'd like to learn more about combining and layout out multiple plots with p
 ```
 
 
-<<<<<<< HEAD
-Ans-1.6.1.1:
-=======
 **Ans-1.6.1.1:**
->>>>>>> b0b556a (ggiaever)
 ```{r Ans-1.6.1.1}
 
 
@@ -1192,11 +1125,7 @@ knitr::include_graphics("images/3-plots.png")
 ```
 
 
-<<<<<<< HEAD
-Ans-1.6.1.2:
-=======
 **Ans-1.6.1.2:**
->>>>>>> b0b556a (ggiaever)
 ```{r Ans-1.6.1.2}
 
 ```
