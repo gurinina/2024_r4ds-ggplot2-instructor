@@ -55,7 +55,7 @@ The `mpg` data frame is bundled with the ggplot2 package and contains
 models.
 
 ```{r}
-?mpg
+#?mpg
 
 nrow(mpg)
 
@@ -267,7 +267,7 @@ geoms.
 **Ans-2.2.1.1:**
 
 ```{r Ans:2.2.1.1}
-
+ggplot(mpg,aes(x = hwy, y = displ)) + geom_point(shape = 17, color = "pink")
 ```
 
 2.  Why did the following code not result in a plot with blue points?
@@ -525,10 +525,6 @@ about any single geom, use the help (e.g., `?geom_smooth`).
 
 1.a. What geom would you use to draw a line chart? A boxplot? A
 histogram? An area chart?
-
-```{r, echo = FALSE}
-library(details)
-```
 
 **Ans-2.3.1.1a**
 

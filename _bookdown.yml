@@ -1,5 +1,5 @@
 book_filename: "r4ds-ggplot2"
-new_session: yes
+new_session: no
 rmd_files:
   - index.Rmd
   - lessons/01-communication.Rmd
