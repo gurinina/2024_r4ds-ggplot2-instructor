@@ -641,7 +641,7 @@ ggplot(mpg) +
 
 **Ans-2.4.1.4a:**
 
-  b. What if you were interested in a specific class, e.g. compact cars? How would highlight that group using only an additional layer added to the plot below?
+  b. What if you were interested in a specific class, e.g. compact cars? How would highlighting that group using only an additional layer added to the plot below?
 
 ```{r}
 #| fig-show: hide
