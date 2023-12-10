@@ -12,3 +12,4 @@ language:
     fig: "Figure "
     tab: "Table "
 rmd_subdir: true
+output_dir: class
