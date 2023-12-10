@@ -503,6 +503,8 @@ We'll come back to themes at the end of the chapter, but in brief, they control 
 The theme setting `legend.position` controls where the legend is drawn:
 
 ```{r}
+#| fig-width: 10
+#| fig-asp: 0.5
 #| fig-alt: |
 #|   Four scatterplots of highway fuel efficiency versus engine size of cars
 #|   where points are colored based on class of car. Clockwise, the legend
