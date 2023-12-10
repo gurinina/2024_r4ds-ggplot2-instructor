@@ -594,7 +594,7 @@ ggplot(diamonds, aes(x = carat, y = price)) +
 
 Another scale that is frequently customized is color.
 The default categorical scale picks colors that are evenly spaced around the color wheel.
-Useful alternatives are the ColorBrewer scales which have been hand tuned to work better for people with common types of color blindness.
+Useful alternatives are the RColorBrewer scales which have been hand tuned to work better for people with common types of color blindness.
 The two plots below look similar, but there is enough difference in the shades of red and green that the dots on the right can be distinguished even by people with red-green color blindness.[^communication-1]
 
 [^communication-1]: You can use a tool like [SimDaltonism](https://michelf.ca/projects/sim-daltonism/) to simulate color blindness to test these images.
@@ -632,7 +632,7 @@ ggplot(mpg, aes(x = displ, y = hwy)) +
   scale_color_brewer(palette = "Dark2")
 ```
 
-The ColorBrewer scales are documented online at <https://colorbrewer2.org/> and made available in R via the **RColorBrewer** package, by Erich Neuwirth.
+The RColorBrewer scales are documented online at <https://colorbrewer2.org/> and made available in R via the **RColorBrewer** package, by Erich Neuwirth.
 \@ref(fig:fig-brewer) shows the complete list of all palettes.
 The sequential (top) and diverging (bottom) palettes are particularly useful if your categorical values are ordered, or have a "middle".
 This often arises if you've used `cut()` to make a continuous variable into a categorical variable.
