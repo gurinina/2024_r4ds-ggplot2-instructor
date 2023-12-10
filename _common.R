@@ -1,18 +1,28 @@
 
 
+# setting the knitr options for each chunk globally
 knitr::opts_chunk$set(
-  fig.width = 7,
-  fig.height = 5,
-  # fig.asp = 0.7,
-  fig.align = "center",
   message = FALSE,
   warning = FALSE,
+  tidy.opts = list(
+    arrow = TRUE,
+    width.cutoff = 80
+  ),
   tidy = TRUE,
-  tidy.opts = list(arrow=TRUE,width.cutoff = 80),
-  # fig.show = 'hold',
-  collapse = TRUE
+  collapse = TRUE,
+  knitr.duplicate.label = "allow",
+  echo = TRUE,
+  fig.width = 7,
+  fig.asp = 0.8,
+  # pdf mode
+  fig.align = "center",
+  fig.show =  "hold"
 )
-
+#
+# knitr::opts_template$set(fullwidth = list(
+#   fig.width = 10, fig.height = 8,
+#   fig.retina = 2, out.width = '100%'
+# ))
 
 options(
   dplyr.print_min = 6,
