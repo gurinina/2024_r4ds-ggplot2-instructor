@@ -51,7 +51,7 @@ models.
 ```{r include = F}
 ##?mpg
 
-nrow(mpg)
+#nrow(mpg)
 
 sapply(mpg,class)
 ```
