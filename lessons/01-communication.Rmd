@@ -104,14 +104,14 @@ ggplot(df, aes(x, y)) +
 
 ### Exercises 1.2.1 {.unnumbered}
 
-1.  Create a boxplot using the fuel economy data with x = `hwy` and y = `class` customized `title`, `subtitle`, `caption`, `x`, `y`, and `color` labels.
+1. Create a boxplot using the fuel economy data with x = `hwy` and y = `class` customized `title`, `subtitle`, `caption`, `x`, `y`, and `color` labels.
 
 **Ans-1.2.1.1:**
 ```{r Ans-1.2.1.1}
 # enter your answer here
 ```
 
-2.  Recreate the following plot using the fuel economy data.
+2. Recreate the following plot using the fuel economy data.
     Note that both the colors and shapes of points vary by type of drive train.
 
 
@@ -289,14 +289,14 @@ The only limit is your imagination (and your patience with positioning annotatio
 
 ### Exercises 1.3.1 {.unnumbered}
 
-1.  Use `geom_text()` with infinite positions to place text at the four corners of the plot. **Hint: construct a `data.frame` similar to `label_info` with the coordinate positions.**
+1. Use `geom_text()` with infinite positions to place text at the four corners of the plot. **Hint: construct a `data.frame` similar to `label_info` with the coordinate positions.**
 
 **Ans-1.3.1.1:**
 ```{r Ans-1.3.1.1}
 ```
 
 
-2.  Use `annotate()` to add a point geom in the middle of the following plot without having to create a tibble. Customize the shape, size, or color of the point.
+2. Use `annotate()` to add a point geom in the middle of the following plot without having to create a tibble. Customize the shape, size, or color of the point.
 
 ```{r}
 #| fig-show: hide
@@ -310,7 +310,8 @@ ggplot(mpg, aes(displ, hwy)) +
 ```{r Ans-1.3.1.2}
 ```
 
-3.a. How do labels with `geom_text()` interact with faceting? Try it by adding a geom_text element to:
+3. 
+    a) How do labels with `geom_text()` interact with faceting? Try it by adding a geom_text element to:
 
 ```{r}
 g <- ggplot(mpg, aes(displ, hwy)) +
@@ -322,25 +323,26 @@ g <- ggplot(mpg, aes(displ, hwy)) +
 ```{r Ans-1.3.1.3a}
 ```
 
-
-  b. How can you add a label to a single facet?
+3. 
+    b) How can you add a label to a single facet?
     
 **Ans-1.3.1.3b:**
 ```{r Ans-1.3.1.3b}
 ```
 
-  c. How can you put a different label in each facet?
+3. 
+    c) How can you put a different label in each facet?
     (Hint: Think about the dataset that is being passed to `geom_text()`.)
     
 **Ans-1.3.1.3c:**
 ```{r Ans-1.3.1.3c}
 ```
 
-4.  What arguments to `geom_label()` control the appearance of the background box?
+4. What arguments to `geom_label()` control the appearance of the background box?
 
 **Ans-1.3.1.4:**
 
-5.  What are the four arguments to `arrow()`?
+5. What are the four arguments to `arrow()`?
     How do they work?
     Create a series of plots that demonstrate the most important options.
 
@@ -714,16 +716,16 @@ Note that all color scales come in two varieties: `scale_color_*()` and `scale_f
 
 There are three ways to control the plot limits:
 
-1.  Adjusting what data are plotted.
-2.  Setting the limits in each scale.
-3.  Setting `xlim` and `ylim` in `coord_cartesian()`.
+1. Adjusting what data are plotted.
+2. Setting the limits in each scale.
+3. Setting `xlim` and `ylim` in `coord_cartesian()`.
 
 We'll demonstrate these options in a series of plots.
 The plot on the left shows the relationship between engine size and fuel efficiency, colored by type of drive train.
 The plot on the right shows the same variables, but subsets the data that are plotted.
 Subsetting the data has affected the x and y scales as well as the smooth curve.
 
-1.  Adjusting what data are plotted:
+1. Adjusting what data are plotted:
 ```{r}
 #| fig-width: 8
 #| fig-alt: |
@@ -749,8 +751,8 @@ Let's compare these to the two plots below where the plot on the left sets the `
 We can see that reducing the limits is equivalent to subsetting the data.
 Therefore, to zoom in on a region of the plot, it's generally best to use `coord_cartesian()`.
 
-2.  Setting the limits in each scale (left)
-3.  Setting `xlim` and `ylim` in `coord_cartesian()` (right).
+2. Setting the limits in each scale (left)
+3. Setting `xlim` and `ylim` in `coord_cartesian()` (right).
 ```{r}
 #| fig-alt: |
 #|   On the left, scatterplot of highway mileage vs. displacement, with
@@ -832,7 +834,7 @@ In this particular case, you could have simply used faceting, but this technique
 
 ### Exercises 1.4.6 {.unnumbered}
 
-1.  Why doesn't the following code override the default scale? Fix the plot so that it colors the points with a gradient set by `low = "yellow", high = "red"`.
+1. Why doesn't the following code override the default scale? Fix the plot so that it colors the points with a gradient set by `low = "yellow", high = "red"`.
 
 ```{r}
 #| fig-show: "hide"
@@ -852,13 +854,13 @@ ggplot(df) +
 ```
 
 
-2.  What is the first argument to every scale?
+2. What is the first argument to every scale?
     How does it compare to `labs()`?
     
 **Ans-1.4.1.2:**
 
 
-3.  First, create the following plot. Then, modify the code using `override.aes` to make the legend easier to see.
+3. First, create the following plot. Then, modify the code using `override.aes` to make the legend easier to see.
 
 ```{r}
 #| fig-show: hide
@@ -953,7 +955,7 @@ The [ggplot2 book](https://ggplot2-book.org/) is also a great place to go for th
 
 ### Exercises 1.5.1 {.unnumbered}
 
-1.  Pick a theme offered by the ggthemes package and apply it to this plot:
+1. Pick a theme offered by the ggthemes package and apply it to this plot:
 
 ```{r}
 #| fig-show: hide
@@ -972,7 +974,7 @@ ggplot(mpg, aes(x = displ, y = hwy, color = drv)) +
 ```
 
 
-2.  Make the axis labels of your plot blue and bolded.
+2. Make the axis labels of your plot blue and bolded.
 
 
 **Ans-1.5.1.2:**
@@ -1089,7 +1091,7 @@ If you'd like to learn more about combining and layout out multiple plots with p
 
 ### Exercises 1.6.1 {.unnumbered}
 
-1.  What happens if you omit the parentheses in the following plot layout. Try it.
+1. What happens if you omit the parentheses in the following plot layout. Try it.
     Can you explain why this happens?
 
 ```{r}
@@ -1111,7 +1113,7 @@ p3 <- ggplot(mpg, aes(x = cty, y = hwy)) +
 ```{r Ans-1.6.1.1}
 ```
 
-2.  Using the three plots from the previous exercise, recreate the following patchwork.
+2. Using the three plots from the previous exercise, recreate the following patchwork.
 
 
 ```{r}
