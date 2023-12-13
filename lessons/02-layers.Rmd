@@ -54,7 +54,7 @@ The `mpg` data frame is bundled with the ggplot2 package and contains
 `r nrow(mpg)` observations on `r mpg %>% distinct(model) %>% nrow()` car
 models.
 
-```{r}
+```{r include = F}
 ?mpg
 
 nrow(mpg)
@@ -944,7 +944,7 @@ why you might need to use a stat explicitly:
 ```{r}
 #| fig-width: 6
 #| fig-alt: |
-    #| Bar chart of number of each cut of diamond. There are roughly 1500 Fair, 5000 Good, 12000 Very Good, 14000 Premium, and 22000 Ideal cut diamonds.
+#| Bar chart of number of each cut of diamond. There are roughly 1500 Fair, 5000 Good, 12000 Very Good, 14000 Premium, and 22000 Ideal cut diamonds.
 
 diamonds %>%
   count(cut) %>%
@@ -1061,7 +1061,7 @@ group_by(class, .drop = FALSE) %>%  add_tally() %>%
         Replot the two plots below using `group = 1`.
 
 ```{r}
-#|fig-show: hide
+#| fig-show: hide
 
 ggplot(diamonds, aes(
   x = cut, y = after_stat(prop)
