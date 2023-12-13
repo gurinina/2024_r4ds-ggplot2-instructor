@@ -49,7 +49,7 @@ The `mpg` data frame is bundled with the ggplot2 package and contains
 models.
 
 ```{r include = F}
-?mpg
+##?mpg
 
 nrow(mpg)
 
