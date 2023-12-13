@@ -53,7 +53,7 @@ models.
 
 #nrow(mpg)
 
-sapply(mpg,class)
+#sapply(mpg,class)
 ```
 
 Among the variables in `mpg` are:
