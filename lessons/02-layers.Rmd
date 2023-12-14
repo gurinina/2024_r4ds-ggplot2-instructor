@@ -49,11 +49,12 @@ The `mpg` data frame is bundled with the ggplot2 package and contains
 models.
 
 ```{r include = F}
-##?mpg
 
-#nrow(mpg)
+?mpg
 
-#sapply(mpg,class)
+nrow(mpg)
+
+sapply(mpg,class)
 ```
 
 Among the variables in `mpg` are:
