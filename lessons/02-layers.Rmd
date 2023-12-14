@@ -86,8 +86,9 @@ categorical variable is mapped to an aesthetic like `color` or `shape`
 #|   except for suv. Each plot comes with a legend that shows the 
 #|   mapping between color or shape and levels of the class variable.
 
-ggplot(mpg, aes(x = displ, y = hwy, color = class)) +
-  geom_point() + ggplot(mpg, aes(x = displ, y = hwy, shape = class)) + geom_point() + plot_layout(ncol = 2)
+ggplot(mpg, aes(x = displ, y = hwy, color = class)) + geom_point() 
+
+ggplot(mpg, aes(x = displ, y = hwy, shape = class)) + geom_point() + plot_layout(ncol = 2)
 ```
 
 Note the use of `plot_layout` from the `patchwork` package to layout the
