@@ -66,7 +66,7 @@ Among the variables in `mpg` are:
     car with a high fuel efficiency when they travel the same distance.
     A numerical variable.
 
-3.  `class`: Type of car. A categorical variable.
+3. `class`: Type of car. A categorical variable.
 
 Let's start by visualizing the relationship between `displ` and `hwy`
 for various `classes` of cars. We can do this with a scatterplot where
@@ -731,7 +731,7 @@ ggplot(mpg) + geom_point(aes(x = drv, y = cyl))
 
 ```
 
-3.  What plots does the following code make? What does `.` do?
+3. What plots does the following code make? What does `.` do?
 
 ```{r}
 #| fig-show: hide
@@ -953,7 +953,7 @@ To find the possible variables that can be computed by the stat, look
 for the section titled "computed variables" in the help for
 `geom_bar()`.
 
-3.  You might want to draw greater attention to the statistical
+3. You might want to draw greater attention to the statistical
     transformation in your code. For example, you might use
     `stat_summary()`, which summarizes the y values for each unique x
     value, to draw attention to the summary that you're computing:
