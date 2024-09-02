@@ -2,7 +2,7 @@
 
 ```{r setup global options}
 # setup global options
-source("_common.R")
+# source("_common.R")
 ```
 
 ## Introduction

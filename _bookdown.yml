@@ -4,7 +4,6 @@ rmd_files:
   - index.Rmd
   - lessons/01-communication.Rmd
   - lessons/02-layers.Rmd
-  - lessons/03-dummy-script.Rmd
 delete_merged_file: false
 chapter_name: "Chapter "
 language:
@@ -12,4 +11,3 @@ language:
     fig: "Figure "
     tab: "Table "
 rmd_subdir: true
-output_dir: class

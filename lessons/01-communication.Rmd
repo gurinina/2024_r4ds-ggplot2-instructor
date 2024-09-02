@@ -1,9 +1,9 @@
 # Communication {#sec-communication}
 
-```{r}
+```{r, out.width="80%"}
 #| echo: false
 
-source("_common.R")
+# source("_common.R")
 ```
 
 ## Introduction
@@ -27,12 +27,12 @@ Don't forget that you'll need to install those packages with `install.packages()
 
 Uncomment the following line if you need to install any of these packages (you should have `tidyverse`:
 
-```{r}
+```{r, out.width="80%"}
 # install.packages(c("ggrepel","patchwork","scales","ggthemes"))
 ```
 
 
-```{r}
+```{r, out.width="80%"}
 #| label: setup
 
 library(tidyverse)
@@ -47,7 +47,7 @@ library(ggthemes)
 The easiest place to start when turning an exploratory graphic into an expository graphic is with good labels.
 You add labels with the `labs()` function.
 
-```{r}
+```{r, out.width="80%"}
 #| fig-alt: |
 #|   Scatterplot of highway fuel efficiency versus engine size of cars, where
 #|   points are colored according to the car class. A smooth curve following
@@ -81,7 +81,7 @@ You can also use `labs()` to replace the axis and legend titles. Note the replac
 It's possible to use mathematical equations instead of text strings.
 Just switch `""` out for `quote()` and read about the available options in `?plotmath`:
 
-```{r}
+```{r, out.width="80%"}
 #| fig-asp: 1
 #| out-width: "50%"
 #| fig-width: 3
@@ -115,7 +115,7 @@ ggplot(df, aes(x, y)) +
     Note that both the colors and shapes of points vary by type of drive train.
 
 
-```{r}
+```{r, out.width="80%"}
 #| label: fuel-economy
 #| echo: false
 #| fig-cap: Scatterplot of highway versus city fuel efficiency.
@@ -132,14 +132,12 @@ knitr::include_graphics("images/fueleconomy.png")
 
 In addition to labelling major components of your plot, it's often useful to label individual observations or groups of observations.
 The first tool you have at your disposal is `geom_text()`.
-`geom_text()` is similar to `geom_point()`, but it has an additional aesthetic: `label`.
-This makes it possible to add textual labels to your plots.
+`geom_text()` is similar to `geom_point()`, but it has an additional aesthetic: `label`. This makes it possible to add textual labels to your plots.
 
 There are two possible sources of labels.
 First, you might have a tibble that provides labels.
 In the following plot we pull out the cars with the highest engine size in each drive type and save their information as a new data frame called `label_info`.
-
-```{r}
+```{r, out.width="80%"}
 # slice_head operates by group, so when n = 1 it means the size of the group
 # case_when where the left hand side determines which values match this case and the right hand side provides the replacement value.
 
@@ -165,7 +163,7 @@ Using the `fontface` and `size` arguments we can customize the look of the text 
 They're larger than the rest of the text on the plot and bolded.
 (`theme(legend.position = "none"`) turns all the legends off --- we'll talk about it more shortly.)
 
-```{r}
+```{r, out.width="80%"}
 #| fig-alt: |
 #|   Scatterplot of highway mileage versus engine size where points are colored
 #|   by drive type. Smooth curves for each drive type are overlaid.
@@ -189,7 +187,7 @@ However the annotated plot we made above is hard to read because the labels over
 We can use the `geom_label_repel()` function from the ggrepel package to address both of these issues.
 This useful package will automatically adjust labels so that they don't overlap:
 
-```{r}
+```{r, out.width="80%"}
 #| fig-alt: |
 #|   Scatterplot of highway fuel efficiency versus engine size of cars, where
 #|   points are colored according to the car class. Some points are labelled
@@ -212,7 +210,7 @@ ggplot(mpg, aes(x = displ, y = hwy, color = drv)) +
 You can also use the same idea to highlight certain points on a plot with `geom_text_repel()` from the ggrepel package.
 Note another handy technique used here: we added a second layer of large, hollow points to further highlight the labelled points.
 
-```{r}
+```{r, out.width="80%"}
 #| fig-alt: |
 #|   Scatterplot of highway fuel efficiency versus engine size of cars. Points
 #|   where highway mileage is above 40 as well as above 20 with engine size
@@ -253,7 +251,7 @@ As a rule of thumb, geoms are generally useful for highlighting a subset of the 
 To demonstrate using `annotate()`, let's create some text to add to our plot.
 The text is a bit long, so we'll use `stringr::str_wrap()` to automatically add line breaks to it given the number of characters you want per line:
 
-```{r}
+```{r, out.width="80%"}
 trend_text <- "Larger engine sizes tend to have lower fuel economy." |> str_wrap(width = 30)
 
 trend_text
@@ -263,7 +261,7 @@ Then, we add two layers of annotation: one with a label geom and the other with 
 The `x` and `y` aesthetics in both define where the annotation should start, and the `xend` and `yend` aesthetics in the segment annotation define the end location of the segment.
 Note also that the segment is styled as an arrow.
 
-```{r}
+```{r, out.width="80%"}
 #| fig-alt: |
 #|   Scatterplot of highway fuel efficiency versus engine size of cars. A red
 #|   arrow pointing down follows the trend of the points and the annotation
@@ -298,7 +296,7 @@ The only limit is your imagination (and your patience with positioning annotatio
 
 2. Use `annotate()` to add a point geom in the middle of the following plot without having to create a tibble. Customize the shape, size, or color of the point.
 
-```{r}
+```{r, out.width="80%"}
 #| fig-show: hide
 
 ggplot(mpg, aes(displ, hwy)) +
@@ -313,7 +311,7 @@ ggplot(mpg, aes(displ, hwy)) +
 3. 
     a) How do labels with `geom_text()` interact with faceting? Try it by adding a geom_text element to:
 
-```{r}
+```{r, out.width="80%"}
 g <- ggplot(mpg, aes(displ, hwy)) +
   geom_point()
 ```
@@ -358,7 +356,7 @@ Scales control how the aesthetic mappings manifest visually.
 Normally, ggplot2 automatically adds scales for you.
 For example, when you type:
 
-```{r}
+```{r, out.width="80%"}
 #| label: default-scales
 #| fig-show: "hide"
 
@@ -368,7 +366,7 @@ ggplot(mpg, aes(x = displ, y = hwy)) +
 
 ggplot2 automatically adds default scales behind the scenes:
 
-```{r}
+```{r, out.width="80%"}
 #| fig-show: hide
 
 ggplot(mpg, aes(x = displ, y = hwy)) +
@@ -402,7 +400,7 @@ Breaks controls the position of the ticks, or the values associated with the key
 Labels controls the text label associated with each tick/key.
 The most common use of `breaks` is to override the default choice:
 
-```{r}
+```{r, out.width="80%"}
 #| fig-alt: |
 #|   Scatterplot of highway fuel efficiency versus engine size of cars,
 #|   colored by drive. The y-axis has breaks starting at 15 and ending at 40,
@@ -418,7 +416,7 @@ This can be useful for maps, or for publishing plots where you can't share the a
 You can also use `breaks` and `labels` to control the appearance of legends.
 For discrete scales for categorical variables, `labels` can be a named list of the existing levels names and the desired labels for them.
 
-```{r}
+```{r, out.width="80%"}
 #| fig-alt: |
 #|   Scatterplot of highway fuel efficiency versus engine size of cars, colored
 #|   by drive. The x and y-axes do not have any labels at the axis ticks.
@@ -436,7 +434,7 @@ The plot on the left shows default labeling with `label_dollar()` from the `scal
 The plot on the right adds further customization by dividing dollar values by 1,000 and adding a suffix "K" (for "thousands") as well as adding custom breaks.
 Note that `breaks` is in the original scale of the data.
 
-```{r}
+```{r, out.width="80%"}
 #| fig-width: 4
 #| fig-alt: |
 #|   Two side-by-side box plots of price versus cut of diamonds. The outliers
@@ -458,7 +456,7 @@ ggplot(diamonds, aes(x = price, y = cut)) +
 
 Another handy label function is `label_percent()`:
 
-```{r}
+```{r, out.width="80%"}
 #| fig-alt: |
 #|   Segmented bar plots of cut, filled with levels of clarity. The y-axis
 #|   labels start at 0% and go to 100%, increasing by 25%. The y-axis label
@@ -472,7 +470,7 @@ ggplot(diamonds, aes(x = cut, fill = clarity)) +
 Another use of `breaks` is when you have relatively few data points and want to highlight exactly where the observations occur.
 For example, take this plot that shows when each US president started and ended their term.
 
-```{r}
+```{r, out.width="80%"}
 #| fig-alt: |
 #|   Line plot of id number of presidents versus the year they started their
 #|   presidency. Start year is marked with a point and a segment that starts
@@ -504,7 +502,7 @@ To control the overall position of the legend, you need to use a `theme()` setti
 We'll come back to themes at the end of the chapter, but in brief, they control the non-data parts of the plot.
 The theme setting `legend.position` controls where the legend is drawn:
 
-```{r}
+```{r, out.width="80%"}
 #| fig-width: 10
 #| fig-asp: 0.5
 #| fig-alt: |
@@ -535,7 +533,7 @@ To control the display of individual legends, use `guides()` along with `guide_l
 The following example shows two important settings: controlling the number of rows the legend uses with `nrow`, and overriding one of the aesthetics to make the points bigger.
 This is particularly useful if you have used a low `alpha` to display many points on a plot.
 
-```{r}
+```{r, out.width="80%"}
 #| fig-alt: |
 #|   Scatterplot of highway fuel efficiency versus engine size of cars
 #|   where points are colored based on class of car. Overlaid on the plot is a
@@ -561,7 +559,7 @@ Fortunately, the same principles apply to all the other aesthetics, so once you'
 It's very useful to plot transformations of your variable.
 For example, it's easier to see the precise relationship between `carat` and `price` if we log transform them:
 
-```{r}
+```{r, out.width="80%"}
 #| fig-width: 7
 #| fig-alt: |
 #|   Two plots of price versus carat of diamonds. Data binned and the color of
@@ -582,7 +580,7 @@ However, the disadvantage of this transformation is that the axes are now labell
 Instead of doing the transformation in the aesthetic mapping, we can instead do it with the scale.
 This is visually identical, except the axes are labelled on the original data scale.
 
-```{r}
+```{r, out.width="80%"}
 #| fig-alt: |
 #|   Plot of price versus carat of diamonds. Data binned and the color of
 #|   the rectangles representing each bin based on the number of points that
@@ -601,7 +599,7 @@ The two plots below look similar, but there is enough difference in the shades o
 
 [^communication-1]: You can use a tool like [SimDaltonism](https://michelf.ca/projects/sim-daltonism/) to simulate color blindness to test these images.
 
-```{r}
+```{r, out.width="80%"}
 #| fig-width: 8
 #| fig-alt: |
 #|   Two scatterplots of highway mileage versus engine size where points are
@@ -623,7 +621,7 @@ Don't forget simpler techniques for improving accessibility.
 If there are just a few colors, you can add a redundant shape mapping.
 This will also help ensure your plot is interpretable in black and white.
 
-```{r}
+```{r, out.width="80%"}
 #| fig-alt: |
 #|   Two scatterplots of highway mileage versus engine size where both color
 #|   and shape of points are based on drive type. The color palette is not
@@ -639,7 +637,7 @@ The RColorBrewer scales are documented online at <https://colorbrewer2.org/> and
 The sequential (top) and diverging (bottom) palettes are particularly useful if your categorical values are ordered, or have a "middle".
 This often arises if you've used `cut()` to make a continuous variable into a categorical variable.
 
-```{r}
+```{r, out.width="80%"}
 #| label: fig-brewer
 #| echo: false
 #| fig-cap: All colorBrewer scales.
@@ -658,7 +656,7 @@ When you have a predefined mapping between values and colors, use `scale_color_m
 For example, if we map presidential party to color, we want to use the standard mapping of red for Republicans and blue for Democrats.
 One approach for assigning these colors is using hex color codes:
 
-```{r}
+```{r, out.width="80%"}
 #| fig-alt: |
 #|   Line plot of id number of presidents versus the year they started their
 #|   presidency. Start year is marked with a point and a segment that starts
@@ -682,7 +680,7 @@ Another option is to use the viridis color scales.
 The designers, Nathaniel Smith and Stéfan van der Walt, carefully tailored continuous color schemes that are perceptible to people with various forms of color blindness as well as perceptually uniform in both color and black and white.
 These scales are available as continuous (`c`), discrete (`d`), and binned (`b`) palettes in ggplot2.
 
-```{r}
+```{r, out.width="80%"}
 #| fig-width: 6
 #| fig-alt: |
 #|   Three plots.
@@ -726,7 +724,7 @@ The plot on the right shows the same variables, but subsets the data that are pl
 Subsetting the data has affected the x and y scales as well as the smooth curve.
 
 1. Adjusting what data are plotted:
-```{r}
+```{r, out.width="80%"}
 #| fig-width: 8
 #| fig-alt: |
 #|   On the left, scatterplot of highway mileage vs. displacement, with
@@ -753,7 +751,7 @@ Therefore, to zoom in on a region of the plot, it's generally best to use `coord
 
 2. Setting the limits in each scale (left)
 3. Setting `xlim` and `ylim` in `coord_cartesian()` (right).
-```{r}
+```{r, out.width="80%"}
 #| fig-alt: |
 #|   On the left, scatterplot of highway mileage vs. displacement, with
 #|   displacement ranging from 5 to 6 and highway mileage ranging from
@@ -777,7 +775,7 @@ ggplot(mpg, aes(x = displ, y = hwy)) +
 On the other hand, setting the `limits` on individual scales is generally more useful if you want to *expand* the limits, e.g., to match scales across different plots.
 For example, if we extract two classes of cars and plot them separately, it's difficult to compare the plots because all three scales (the x-axis, the y-axis, and the color aesthetic) have different ranges.
 
-```{r}
+```{r, out.width="80%"}
 #| fig-alt: |
 #|   On the left, a scatterplot of highway mileage vs. displacement of SUVs.
 #|   On the right, a scatterplot of the same variables for compact cars.
@@ -800,7 +798,7 @@ ggplot(suv, aes(x = displ, y = hwy, color = drv)) +
 
 One way to overcome this problem is to share scales across multiple plots, training the scales with the `limits` of the full data.
 
-```{r}
+```{r, out.width="80%"}
 #| fig-alt: |
 #|   On the left, a scatterplot of highway mileage vs. displacement of SUVs.
 #|   On the right, a scatterplot of the same variables for compact cars.
@@ -836,7 +834,7 @@ In this particular case, you could have simply used faceting, but this technique
 
 1. Why doesn't the following code override the default scale? Fix the plot so that it colors the points with a gradient set by `low = "yellow", high = "red"`.
 
-```{r}
+```{r, out.width="80%"}
 #| fig-show: "hide"
 
 df <- tibble(
@@ -862,7 +860,7 @@ ggplot(df) +
 
 3. First, create the following plot. Then, modify the code using `override.aes` to make the legend easier to see.
 
-```{r}
+```{r, out.width="80%"}
 #| fig-show: hide
 
 ggplot(diamonds, aes(x = carat, y = price)) +
@@ -879,7 +877,7 @@ ggplot(diamonds, aes(x = carat, y = price)) +
 
 Finally, you can customize the non-data elements of your plot with a theme:
 
-```{r}
+```{r, out.width="80%"}
 #| fig-alt: |
 #|   Scatterplot of highway mileage vs. displacement of cars, colored by class
 #|   of car. The plot background is white, with gray grid lines.
@@ -896,7 +894,7 @@ You can also create your own themes, if you are trying to match a particular cor
 
 Many people wonder why the default theme has a gray background. This was a deliberate choice because it puts the data forward while still making the grid lines visible. The white grid lines are visible (which is important because they significantly aid position judgments), but they have little visual impact and we can easily tune them out. The gray background gives the plot a similar typographic color to the text, ensuring that the graphics fit in with the flow of a document without jumping out with a bright white background. Finally, the gray background creates a continuous field of color which ensures that the plot is perceived as a single visual entity.
 
-```{r}
+```{r, out.width="80%"}
 #| label: fig-themes
 #| echo: false
 #| fig-cap: The eight themes built-in to ggplot2.
@@ -925,7 +923,7 @@ The theme elements that control the position of the title and the caption are `p
 In the following plot these are set to `"plot"` to indicate these elements are aligned to the entire plot area, instead of the plot panel (the default).
 A few other helpful `theme()` components are used to change the placement for format of the title and caption text.
 
-```{r}
+```{r, out.width="80%"}
 #| fig-alt: |
 #|   Scatterplot of highway fuel efficiency versus engine size of cars, colored
 #|   by drive. The plot is titled 'Larger engine sizes tend to have lower fuel
@@ -957,7 +955,7 @@ The [ggplot2 book](https://ggplot2-book.org/) is also a great place to go for th
 
 1. Pick a theme offered by the ggthemes package and apply it to this plot:
 
-```{r}
+```{r, out.width="80%"}
 #| fig-show: hide
 
 ggplot(mpg, aes(x = displ, y = hwy, color = drv)) +
@@ -993,7 +991,7 @@ To place two plots next to each other, you can simply add them to each other.
 Note that you first need to create the plots and save them as objects (in the following example they're called `p1` and `p2`).
 Then, you place them next to each other with `+`.
 
-```{r}
+```{r, out.width="80%"}
 #| fig-width: 6
 #| fig-asp: 0.5
 #| fig-alt: |
@@ -1013,7 +1011,7 @@ p1 + p2
 
 You can also create complex plot layouts using `|` and `/`. In the following, `|` places the `p1` and `p3` next to each other and `/` moves `p2` to the next line.
 
-```{r}
+```{r, out.width="80%"}
 #| fig-width: 6
 #| fig-asp: 0.8
 #| fig-alt: |
@@ -1039,7 +1037,7 @@ The legend is placed on top, inside the `guide_area()`.
 Finally, we have also customized the heights of the various components of our patchwork -- the guide has a height of 1, the box plots 3, density plots 2, and the faceted scatterplot 4.
 Patchwork divides up the area you have allotted for your plot using this scale and places the components accordingly.
 
-```{r}
+```{r, out.width="80%"}
 #| fig-width: 8
 #| fig-asp: 1
 #| fig-alt: |
@@ -1094,7 +1092,7 @@ If you'd like to learn more about combining and layout out multiple plots with p
 1. What happens if you omit the parentheses in the following plot layout. Try it.
     Can you explain why this happens?
 
-```{r}
+```{r, out.width="80%"}
 p1 <- ggplot(mpg, aes(x = displ, y = hwy)) +
   geom_point() +
   labs(title = "Plot 1")
@@ -1116,12 +1114,12 @@ p3 <- ggplot(mpg, aes(x = cty, y = hwy)) +
 2. Using the three plots from the previous exercise, recreate the following patchwork.
 
 
-```{r}
+```{r, out.width="80%"}
 #| label: 3-plots
 #| echo: false
 #| fig-cap: Scatterplot of highway versus city fuel efficiency.
 
-knitr::include_graphics("images/3-plots.png")
+knitr::include_graphics("images/3plots.png")
 ```
 
 
@@ -1136,5 +1134,6 @@ In this chapter you've learned about adding plot labels such as title, subtitle,
 You've also learned about combining multiple plots in a single graph using both simple and complex plot layouts.
 
 While you've so far learned about how to make many different types of plots and how to customize them using a variety of techniques, we've barely scratched the surface of what you can create with ggplot2.
+
 If you want to get a comprehensive understanding of ggplot2, we recommend reading the book, [*ggplot2: Elegant Graphics for Data Analysis*](https://ggplot2-book.org).
 Other useful resources are the [*R Graphics Cookbook*](https://r-graphics.org) by Winston Chang and [*Fundamentals of Data Visualization*](https://clauswilke.com/dataviz/) by Claus Wilke.
