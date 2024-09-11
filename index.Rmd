@@ -1,6 +1,5 @@
 ---
 title: "r4ds-ggplot2" 
-date: "`r Sys.Date()`" 
 output:
   bookdown::gitbook:
     css: [css/git.css, css/toc.css]
@@ -13,13 +12,13 @@ github-repo: "gurinina/r4ds-ggplot2"
 url: 'https://bookdown.org/ggiaever/r4ds-ggplot2'
 site: bookdown::bookdown_site 
 documentclass: book
-cover-image: "images/koos10.png"
+cover-image: "images/koosggplot.png"
 ---
 
 # R for data science workshop {-}
 
 <p align="center">
-  <img src="images/koosggplot.png" alt="Welcome to Omics Science!" width="600" />
+  <img src="images/koosggplot.png" alt="Welcome to Omics Science!" width="300" />
 </p>
 
 This website us the ggplot visulization sections of Hadley Wickham's book [2nd edition of "R for Data Science"](https://r4ds.hadley.nz/).

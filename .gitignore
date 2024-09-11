@@ -1,3 +1,11 @@
+# bookdown files
+_book
+_bookdown_files/
+r4ds-ggplot2.Rmd
+viewer_output.Rmd
+css/epub.css
+render_all.R
+
 # History files
 .Rhistory
 .Rapp.history
