@@ -1,10 +1,5 @@
 # Layers
 
-```{r setup global options}
-# setup global options
-# source("_common.R")
-```
-
 ## Introduction
 
 In this chapter, you'll expand on your ggplot2 foundation as you learn

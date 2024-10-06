@@ -1,6 +1,4 @@
-
-
-# setting the knitr options for each chunk globally
+# Global knitr options for all formats
 knitr::opts_chunk$set(
   message = FALSE,
   warning = FALSE,
@@ -12,18 +10,32 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   knitr.duplicate.label = "allow",
   echo = TRUE,
-  fig.width = 7,
-  fig.asp = 0.8,
-  # pdf mode
   fig.align = "center",
-  fig.show =  "hold"
+  fig.show = "hold"
 )
-#
-# knitr::opts_template$set(fullwidth = list(
-#   fig.width = 10, fig.height = 8,
-#   fig.retina = 2, out.width = '100%'
-# ))
 
+# Conditional formatting for different output types
+if (knitr::is_html_output()) {
+  # For HTML outputs (GitBook)
+  knitr::opts_chunk$set(
+    fig.width = 10, fig.height = 8,
+    fig.retina = 2, out.width = '100%'
+  )
+} else if (knitr::is_latex_output()) {
+  # For PDF outputs
+  knitr::opts_chunk$set(
+    fig.width = 7, fig.height = 5,
+    fig.align = "center"
+  )
+} else {
+  # For EPUB or other formats
+  knitr::opts_chunk$set(
+    fig.width = 6, fig.height = 4,
+    fig.align = "center"
+  )
+}
+
+# Setting other global options
 options(
   dplyr.print_min = 6,
   dplyr.print_max = 6,
@@ -31,7 +43,8 @@ options(
   pillar.min_chars = 15,
   stringr.view_n = 6,
   pillar.bold = TRUE,
-  width = 80 #> comment
+  width = 80
 )
 
+# Set the ggplot2 default theme
 ggplot2::theme_set(ggplot2::theme_bw())
